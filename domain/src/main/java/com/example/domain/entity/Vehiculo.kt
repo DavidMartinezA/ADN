@@ -1,7 +1,10 @@
 package com.example.domain.entity
 
-abstract class Vehiculo() {
+import androidx.room.Entity
 
-    abstract val numeroPlaca: String
+
+@Entity
+abstract class Vehiculo() {
+   abstract val numeroPlaca: String
 
 }

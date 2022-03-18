@@ -1,5 +1,7 @@
 package com.example.domain.entity
 
-class Carro(override var numeroPlaca: String) : Vehiculo() {
+import androidx.room.PrimaryKey
+
+class Carro(@PrimaryKey override var numeroPlaca: String) : Vehiculo() {
 
 }

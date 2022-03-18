@@ -1,28 +1,32 @@
 package com.example.domain.repository
 
+import androidx.room.Dao
+import androidx.room.Delete
+import androidx.room.Insert
+import androidx.room.Query
 import com.example.domain.entity.Carro
 import com.example.domain.entity.Moto
 import com.example.domain.entity.Vehiculo
 
-/*
 
 @Dao
 interface VehiculoDao {
     @Insert
-    fun insertAll(vararg vehiculo: Vehiculo)
+    fun insertVehiculo(vararg vehiculo: Vehiculo)
 
     @Delete
-    fun delete(vehiculo: Vehiculo)
+    suspend fun deleteVehiculo(vehiculo: Vehiculo)
 
     @Query("SELECT * FROM vehiculo")
-    fun getAllMotos(): List<Moto>
+    suspend fun getAllMotos(): List<Moto>
 
     @Query("SELECT * FROM vehiculo")
-    fun getAllCarros(): List<Carro>
+    suspend fun getAllCarros(): List<Carro>
 
     @Query("SELECT * FROM vehiculo")
-    fun getAllVehiculos(): List<Vehiculo>
+    suspend fun getAllVehiculos(): List<Vehiculo>
+
 
 }
 
-*/
+
