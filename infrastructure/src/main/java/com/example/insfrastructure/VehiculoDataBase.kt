@@ -8,5 +8,5 @@ import com.example.domain.repository.VehiculoDao
 @Database(entities = [Vehiculo::class], version = 1)
 abstract class VehiculoDataBase: RoomDatabase() {
 
-    abstract fun userDao(): VehiculoDao
+    abstract fun VehiculoDao(): VehiculoDao
 }
