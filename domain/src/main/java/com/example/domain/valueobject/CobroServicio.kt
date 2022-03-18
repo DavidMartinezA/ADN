@@ -13,7 +13,7 @@ interface CobroServicio {
         if (duracionServicio < 9) {
             tarifaParqueoTotal = duracionServicio * Parqueadero.VALOR_HORA_MOTO
         } else {
-            tarifaParqueoTotal = (ceil((duracionServicio / 24).toDouble()) * Parqueadero.VALOR_DIA_MOTO).toInt()
+            tarifaParqueoTotal = ((duracionServicio / 24).toDouble() * Parqueadero.VALOR_DIA_MOTO).toInt()
 
         }
         if (moto.cilindrajeAlto) {

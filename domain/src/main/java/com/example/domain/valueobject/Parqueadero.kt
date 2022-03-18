@@ -15,7 +15,7 @@ class Parqueadero : CobroServicio {
         var restringido = false
 
         if (numeroPlaca.isEmpty()) {
-            restringido = true// todo mostrar mensaje que no es admintido
+            restringido = true// todo mostrar mensaje que no es admitido
         } else {
             if (numeroPlaca.first().uppercase() == LETRA_RESTRINGIDA) {
                 restringido = !diasPermitidos.contains(diaDeLaSemana)
