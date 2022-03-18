@@ -3,6 +3,7 @@ package com.example.domain.repository
 import com.example.domain.entity.Carro
 import com.example.domain.entity.Moto
 import com.example.domain.entity.Vehiculo
+
 /*
 
 @Dao
@@ -13,12 +14,15 @@ interface VehiculoDao {
     @Delete
     fun delete(vehiculo: Vehiculo)
 
-    @Query("SELECT * FROM user")
+    @Query("SELECT * FROM vehiculo")
     fun getAllMotos(): List<Moto>
 
-    @Query("SELECT * FROM user")
+    @Query("SELECT * FROM vehiculo")
     fun getAllCarros(): List<Carro>
 
-    @Query("SELECT * FROM user")
+    @Query("SELECT * FROM vehiculo")
     fun getAllVehiculos(): List<Vehiculo>
-}*/
+
+}
+
+*/

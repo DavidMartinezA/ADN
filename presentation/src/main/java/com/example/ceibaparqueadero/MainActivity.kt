@@ -18,8 +18,8 @@ class MainActivity : AppCompatActivity() {
 
         parqueaderoCeiba.ingresoVehiculos(carroJuan)
         parqueaderoCeiba.ingresoVehiculos(motoJuan)
-        val tarifaCarro =  parqueaderoCeiba.cobroTarifaCarro(9, carroJuan).toString()
-        val tarifaMoto =  parqueaderoCeiba.cobroTarifaMoto(5, motoJuan).toString()
+        val tarifaCarro =  parqueaderoCeiba.cobroTarifaCarro(9.0, carroJuan).toString()
+        val tarifaMoto =  parqueaderoCeiba.cobroTarifaMoto(5.0, motoJuan).toString()
 
         Log.i("Prueba de Codigo 1",tarifaCarro)
         Log.i("Prueba de Codigo 2",tarifaMoto)

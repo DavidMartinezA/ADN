@@ -3,6 +3,7 @@ package com.example.domain.valueobject
 import com.example.domain.entity.Carro
 import com.example.domain.entity.Moto
 import com.example.domain.entity.Vehiculo
+import kotlin.math.ceil
 
 class Parqueadero : CobroServicio {
 
@@ -42,6 +43,32 @@ class Parqueadero : CobroServicio {
             listaVehiculo.add(vehiculo)
         }
 
+    }
+    override fun cobroTarifaMoto(duracionServicio: Double, moto: Moto): Int {
+
+        var tarifaParqueoTotal: Int = if (duracionServicio < 9) {
+            duracionServicio.toInt() * Parqueadero.VALOR_HORA_MOTO
+        } else {
+            ((duracionServicio / 24).toDouble() * Parqueadero.VALOR_DIA_MOTO).toInt()
+
+        }
+        if (moto.cilindrajeAlto) {
+            tarifaParqueoTotal += 2000
+        }
+        return tarifaParqueoTotal
+    }
+
+    override fun cobroTarifaCarro(duracionServicio: Double, carro: Carro): Int {
+
+        val fraccionDias = 24.0 / duracionServicio
+        ceil(fraccionDias)
+
+        val tarifaParqueoTotal: Int = if (duracionServicio < 9) {
+            duracionServicio.toInt() * Parqueadero.VALOR_HORA_CARRO
+        } else {
+            (fraccionDias * Parqueadero.VALOR_DIA_CARRO).toInt()
+        }
+        return tarifaParqueoTotal
     }
 
     fun salidaVehiculos(vehiculo: Vehiculo): Boolean {
