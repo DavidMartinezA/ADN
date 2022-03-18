@@ -15,5 +15,5 @@ dependencyResolutionManagement {
 rootProject.name = "CeibaParqueadero"
 include ':presentation'
 include ':domain'
-include ':insfrastructure'
+include ':infrastructure'
 include ':application'
