@@ -30,6 +30,9 @@ android {
         jvmTarget = '1.8'
     }
 }
+jacoco {
+    toolVersion = "0.8.7"
+}
 
 dependencies {
 
