@@ -54,7 +54,7 @@ dependencies {
 
 }
 // tarea para los reportes de analisis de codigo
-task jacocoTestReport(type: JacocoReport, dependsOn: [':domain :taskTest', ':application :taskTest', ':infrastructure:taskTest',':presentation:taskTest']) {
+task jacocoTestReport(type: JacocoReport, dependsOn: [':domain :testDebugUnitTes', ':application :testDebugUnitTes', ':infrastructure:testDebugUnitTes',':presentation:testDebugUnitTes']) {
 
     def modulePresentation = project(':presentation')
     def moduleDomain = project(':domain')
