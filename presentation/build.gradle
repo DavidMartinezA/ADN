@@ -52,6 +52,7 @@ dependencies {
     implementation "androidx.room:room-ktx:2.4.2"
     kapt "androidx.room:room-compiler:2.4.2"
 
+    testImplementation 'org.mockito:mockito-core:3.3.3'
 }
 // tarea para los reportes de analisis de codigo
 // :testDebugUnitTes archivo dependencia un solo modulo
