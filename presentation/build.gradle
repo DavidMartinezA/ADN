@@ -55,7 +55,7 @@ dependencies {
 }
 // tarea para los reportes de analisis de codigo
 // :testDebugUnitTes archivo dependencia un solo modulo
-task jacocoTestReport(type: JacocoReport, dependsOn: [':testDebugUnitTes']) {
+task jacocoTestReport(type: JacocoReport, dependsOn: [':presentation:testDebugUnitTest',':domain:testDebugUnitTest',':infrastructure:testDebugUnitTest',':application:testDebugUnitTest']) {
 
     def modulePresentation = project(':presentation')
     def moduleDomain = project(':domain')
@@ -84,7 +84,7 @@ task jacocoTestReport(type: JacocoReport, dependsOn: [':testDebugUnitTes']) {
     def executionFileForUnitTestInModule = "$buildDir/outputs/unit_test_code_coverage/debugUnitTest/testDebugUnitTest.exec"
 
     def executionFileForUnitTestInOtherModule =
-            "$modulePresentation.buildDir/jacoco/testDebugUnitTest.exec"
+          //  "$modulePresentation.buildDir/jacoco/testDebugUnitTest.exec"
             "$moduleDomain.buildDir/jacoco/testDebugUnitTest.exec"
             "$moduleApplication.buildDir/jacoco/testDebugUnitTest.exec"
             "$moduleInfrastructure.buildDir/jacoco/testDebugUnitTest.exec"
