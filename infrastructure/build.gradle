@@ -5,9 +5,10 @@ plugins {
 }
 
 android {
-    compileSdk 32
 
-    defaultConfig {
+    compileSdk 32
+    
+        defaultConfig {
         minSdk 26
         targetSdk 32
         versionCode 1
@@ -21,6 +22,9 @@ android {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
+        debug{
+            testCoverageEnabled true
+        }
     }
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
@@ -29,9 +33,6 @@ android {
     kotlinOptions {
         jvmTarget = '1.8'
     }
-}
-jacoco {
-    toolVersion = "0.8.7"
 }
 
 dependencies {

@@ -1,9 +1,9 @@
 plugins {
     id 'com.android.application'
     id 'org.jetbrains.kotlin.android'
-    id 'jacoco'
     id 'kotlin-kapt'
-   }
+    id 'jacoco'
+}
 
 android {
     compileSdk 32
@@ -23,6 +23,10 @@ android {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
+        debug {
+            testCoverageEnabled true
+        }
+
     }
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
@@ -32,9 +36,7 @@ android {
         jvmTarget = '1.8'
     }
 }
-jacoco {
-    toolVersion = "0.8.7"
-}
+
 
 dependencies {
 
@@ -47,48 +49,49 @@ dependencies {
     androidTestImplementation 'androidx.test.ext:junit:1.1.3'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
 
-   // Declaracion de dependecias Room
     implementation "androidx.room:room-ktx:2.4.2"
     kapt "androidx.room:room-compiler:2.4.2"
 
 }
 // tarea para los reportes de analisis de codigo
-task jacocoTestReport (type: JacocoReport, dependsOn: [':domain :taskTest',':application :taskTest',':infrastructure:taskTest',':presentation:taskTest']){
+task jacocoTestReport(type: JacocoReport, dependsOn: [':domain :taskTest', ':application :taskTest', ':infrastructure:taskTest',':presentation:taskTest']) {
 
+    def modulePresentation = project(':presentation')
     def moduleDomain = project(':domain')
     def moduleApplication = project(':application')
     def moduleInfrastructure = project(':infrastructure')
-    def modulePresentation = project(':presentation')
 
     def directoriesToCoverage = layout.files("$buildDir/tmp/kotlin-classes/debug",
-            "$moduleDomain.buildDir/tmp/kotlin-classes/debug",
             "$modulePresentation.buildDir/tmp/kotlin-classes/debug",
+            "$moduleDomain.buildDir/tmp/kotlin-classes/debug",
             "$moduleApplication.buildDir/tmp/kotlin-classes/debug",
             "$moduleInfrastructure.buildDir/tmp/kotlin-classes/debug"
     )
 
     def mainSources = layout.files("$project.projectDir/src/main/java",
-            "$moduleDomain.projectDir/src/main/java",
             "$modulePresentation.projectDir/src/main/java",
+            "$moduleDomain.projectDir/src/main/java",
             "$moduleApplication.projectDir/src/main/java",
-            "$moduleInfrastructure.projectDir/src/main/java",
+            "$moduleInfrastructure.projectDir/src/main/java"
     )
 
     def executionFilesFromConnectedAndroidTest = fileTree(
             dir: "$buildDir", includes:
-                    ["outputs/code_coverage/debugAndroidTest/connected/**coverage.ec"]
+            ["outputs/code_coverage/debugAndroidTest/connected/**coverage.ec"]
     )
 
     def executionFileForUnitTestInModule = "$buildDir/outputs/unit_test_code_coverage/debugUnitTest/testDebugUnitTest.exec"
-    //def executionFileForUnitTestInOtherModule =
-            "$moduleDomain.buildDir/jacoco/testDebugUnitTest.exec"
+
+    def executionFileForUnitTestInOtherModule =
             "$modulePresentation.buildDir/jacoco/testDebugUnitTest.exec"
+            "$moduleDomain.buildDir/jacoco/testDebugUnitTest.exec"
             "$moduleApplication.buildDir/jacoco/testDebugUnitTest.exec"
             "$moduleInfrastructure.buildDir/jacoco/testDebugUnitTest.exec"
 
     def executionFiles = layout.files(
             executionFilesFromConnectedAndroidTest,
-            executionFileForUnitTestInModule
+            executionFileForUnitTestInModule,
+            executionFileForUnitTestInOtherModule
     )
 
     sourceDirectories.setFrom(files([mainSources]))
@@ -99,5 +102,6 @@ task jacocoTestReport (type: JacocoReport, dependsOn: [':domain :taskTest',':app
         xml.enabled true
         html.enabled true
     }
+
 
 }
