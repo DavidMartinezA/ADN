@@ -12,7 +12,7 @@ class MainActivity : AppCompatActivity() {
         val motoJuan= Moto("lid50c", false)
         val parqueaderoCeiba = Parqueadero(this)
 
-        var dia : DiaDeLaSemana = DiaDeLaSemana()
+        var dia : FechaCalendario = FechaCalendario()
 
 
         parqueaderoCeiba.ingresoVehiculos(carroJuan, dia.diaSemana())

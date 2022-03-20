@@ -13,22 +13,24 @@ class ParqueaderoTest {
 
         val ingresoParqueadero = Parqueadero()
         val carroJuan: Vehiculo = Carro("HSU531")
-        ingresoParqueadero.ingresoVehiculos(carroJuan,"domingo")
+        ingresoParqueadero.ingresoVehiculos(carroJuan,"Domingo")
         val restringido = ingresoParqueadero.restringido
         assert(!restringido)
     }
 
     @Test
     fun ingresoVehiculos_PlacaVacia_IngresoNoPermitido() {
+
         val ingresoParqueadero = Parqueadero()
         val carroJuan: Vehiculo = Carro("")
-        ingresoParqueadero.ingresoVehiculos(carroJuan,"domingo")
+        ingresoParqueadero.ingresoVehiculos(carroJuan,"Domingo")
         val restringido = ingresoParqueadero.restringido
         assert(restringido)
     }
 
     @Test
     fun ingresoVehiculos_PlacaMayuscula_IngresoPermitido() {
+
         val ingresoParqueadero = Parqueadero()
         val carroJuan: Vehiculo = Carro("HSU531")
         ingresoParqueadero.ingresoVehiculos(carroJuan,"domingo")
@@ -44,6 +46,36 @@ class ParqueaderoTest {
         ingresoParqueadero.ingresoVehiculos(carroJuan,"domingo")
         val restringido = ingresoParqueadero.restringido
         assert(!restringido)
+    }
+
+    @Test
+    fun ingresoVehiculos_DiaPermitido_IngresoPermitido() {
+
+        val ingresoParqueadero = Parqueadero()
+        val carroJuan: Vehiculo = Carro("Asu531")
+        ingresoParqueadero.ingresoVehiculos(carroJuan,"Domingo")
+        val restringido = ingresoParqueadero.restringido
+        assert(!restringido)
+    }
+
+    @Test
+    fun ingresoVehiculos_DiaPermitidoDos_IngresoPermitido() {
+
+        val ingresoParqueadero = Parqueadero()
+        val carroJuan: Vehiculo = Carro("Asu531")
+        ingresoParqueadero.ingresoVehiculos(carroJuan,"Lunes")
+        val restringido = ingresoParqueadero.restringido
+        assert(!restringido)
+    }
+
+    @Test
+    fun ingresoVehiculos_DiaNoPermitidoDos_IngresoNoPermitido() {
+
+        val ingresoParqueadero = Parqueadero()
+        val carroJuan: Vehiculo = Carro("Asu531")
+        ingresoParqueadero.ingresoVehiculos(carroJuan,"Martes")
+        val restringido = ingresoParqueadero.restringido
+        assert(restringido)
     }
 
     @Test

@@ -13,24 +13,25 @@ class Parqueadero() : CobroServicio, Ingreso{
     private var listaVehiculo = arrayListOf<Vehiculo>()
     private val diasPermitidos = arrayListOf("Domingo", "Lunes")
 
-    override fun restriccionIngreso(vehiculo: Vehiculo, diaDeLaSemana: String): Boolean {
+    override fun restriccionIngreso(vehiculo: Vehiculo, diaSemana :String): Boolean {
 
         restringido = false
 
         if (vehiculo.numeroPlaca.isEmpty()) {
             restringido = true
-            /*val alertas = CreadorAlertas()
-            alertas.mostrarDialogoAlerta(context,"Error","Informacion NO Valida")*/
+
         } else {
             vehiculo.numeroPlaca.uppercase()
             if (vehiculo.numeroPlaca.first().uppercase() == LETRA_RESTRINGIDA) {
-                restringido = !diasPermitidos.contains(diaDeLaSemana)
-            }
+                restringido = !diasPermitidos.contains(diaSemana)
+                    /*val alertas = CreadorAlertas()
+                     alertas.mostrarDialogoAlerta(context,"Error","Informacion NO Valida")*/
+                }
         }
         return restringido
     }
 
-    override fun ingresoVehiculos(vehiculo: Vehiculo, diaDeLaSemana: String): Boolean {
+    override fun ingresoVehiculos(vehiculo: Vehiculo, diaSemana :String ): Boolean {
 
         var hayCupo = false
 
@@ -45,7 +46,7 @@ class Parqueadero() : CobroServicio, Ingreso{
             }
         }
 
-        if (restriccionIngreso(vehiculo, diaDeLaSemana) && hayCupo) {
+        if (restriccionIngreso(vehiculo,diaSemana ) && hayCupo && !restringido){
             listaVehiculo.add(vehiculo)
         }
         return hayCupo
