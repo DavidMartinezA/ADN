@@ -5,10 +5,10 @@ import com.example.domain.entity.Moto
 import com.example.domain.entity.Vehiculo
 import kotlin.math.ceil
 
-class Parqueadero : CobroServicio {
+class Parqueadero() : CobroServicio {
+
     var restringido = false
     private var listaVehiculo = arrayListOf<Vehiculo>()
-    private val diaDeLaSemana = DiaDeLaSemana().diaSemana()
     private val diasPermitidos = arrayListOf("Domingo", "Lunes")
 
     private fun restriccionIngreso(vehiculo: Vehiculo, diaDeLaSemana: String): Boolean {
@@ -16,7 +16,9 @@ class Parqueadero : CobroServicio {
         restringido = false
 
         if (vehiculo.numeroPlaca.isEmpty()) {
-            restringido = true// todo mostrar mensaje que no es admitido
+            restringido = true
+            /*val alertas = CreadorAlertas()
+            alertas.mostrarDialogoAlerta(context,"Error","Informacion NO Valida")*/
         } else {
             vehiculo.numeroPlaca.uppercase()
             if (vehiculo.numeroPlaca.first().uppercase() == LETRA_RESTRINGIDA) {
@@ -26,7 +28,7 @@ class Parqueadero : CobroServicio {
         return restringido
     }
 
-    fun ingresoVehiculos(vehiculo: Vehiculo,diaDeLaSemana: String) {
+    fun ingresoVehiculos(vehiculo: Vehiculo, diaDeLaSemana: String): Boolean {
 
         var hayCupo = false
 
@@ -41,17 +43,18 @@ class Parqueadero : CobroServicio {
             }
         }
 
-        if (restriccionIngreso(vehiculo,diaDeLaSemana) && hayCupo) {
+        if (restriccionIngreso(vehiculo, diaDeLaSemana) && hayCupo) {
             listaVehiculo.add(vehiculo)
         }
-
+        return hayCupo
     }
+
     override fun cobroTarifaMoto(duracionServicio: Double, moto: Moto): Int {
 
         var tarifaParqueoTotal: Int = if (duracionServicio < 9) {
-            duracionServicio.toInt() * Parqueadero.VALOR_HORA_MOTO
+            duracionServicio.toInt() * VALOR_HORA_MOTO
         } else {
-            ((duracionServicio / 24).toDouble() * Parqueadero.VALOR_DIA_MOTO).toInt()
+            ((duracionServicio / 24) * VALOR_DIA_MOTO).toInt()
 
         }
         if (moto.cilindrajeAlto) {
@@ -66,9 +69,9 @@ class Parqueadero : CobroServicio {
         ceil(fraccionDias)
 
         val tarifaParqueoTotal: Int = if (duracionServicio < 9) {
-            duracionServicio.toInt() * Parqueadero.VALOR_HORA_CARRO
+            duracionServicio.toInt() * VALOR_HORA_CARRO
         } else {
-            (fraccionDias * Parqueadero.VALOR_DIA_CARRO).toInt()
+            (fraccionDias * VALOR_DIA_CARRO).toInt()
         }
         return tarifaParqueoTotal
     }

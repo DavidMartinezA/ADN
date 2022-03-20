@@ -2,7 +2,6 @@ package com.example.domain.valueobject
 
 import com.example.domain.entity.Carro
 import com.example.domain.entity.Vehiculo
-import org.junit.Assert.*
 
 import org.junit.Test
 
@@ -38,6 +37,7 @@ class ParqueaderoTest {
 
     @Test
     fun ingresoVehiculos_PlacaMinuscula_IngresoPermitido() {
+
         val ingresoParqueadero = Parqueadero()
         val carroJuan: Vehiculo = Carro("hsu531")
         ingresoParqueadero.ingresoVehiculos(carroJuan,"domingo")
