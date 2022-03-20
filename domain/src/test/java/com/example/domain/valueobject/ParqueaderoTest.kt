@@ -1,5 +1,6 @@
 package com.example.domain.valueobject
 
+import com.example.domain.aggregate.Parqueadero
 import com.example.domain.entity.Carro
 import com.example.domain.entity.Vehiculo
 

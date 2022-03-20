@@ -2,11 +2,6 @@ package com.example.ceibaparqueadero
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
-import com.example.domain.entity.Carro
-import com.example.domain.entity.Moto
-import com.example.domain.valueobject.DiaDeLaSemana
-import com.example.domain.valueobject.Parqueadero
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {

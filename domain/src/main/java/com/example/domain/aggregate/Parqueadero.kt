@@ -1,17 +1,19 @@
-package com.example.domain.valueobject
+package com.example.domain.aggregate
 
 import com.example.domain.entity.Carro
 import com.example.domain.entity.Moto
 import com.example.domain.entity.Vehiculo
+import com.example.domain.valueobject.CobroServicio
+import com.example.domain.valueobject.Ingreso
 import kotlin.math.ceil
 
-class Parqueadero() : CobroServicio {
+class Parqueadero() : CobroServicio, Ingreso{
 
     var restringido = false
     private var listaVehiculo = arrayListOf<Vehiculo>()
     private val diasPermitidos = arrayListOf("Domingo", "Lunes")
 
-    private fun restriccionIngreso(vehiculo: Vehiculo, diaDeLaSemana: String): Boolean {
+    override fun restriccionIngreso(vehiculo: Vehiculo, diaDeLaSemana: String): Boolean {
 
         restringido = false
 
@@ -28,7 +30,7 @@ class Parqueadero() : CobroServicio {
         return restringido
     }
 
-    fun ingresoVehiculos(vehiculo: Vehiculo, diaDeLaSemana: String): Boolean {
+    override fun ingresoVehiculos(vehiculo: Vehiculo, diaDeLaSemana: String): Boolean {
 
         var hayCupo = false
 
@@ -76,7 +78,7 @@ class Parqueadero() : CobroServicio {
         return tarifaParqueoTotal
     }
 
-    fun salidaVehiculos(vehiculo: Vehiculo): Boolean {
+    override fun salidaVehiculos(vehiculo: Vehiculo): Boolean {
         listaVehiculo.remove(vehiculo)
         return true
     }
