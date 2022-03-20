@@ -6,26 +6,28 @@ import com.example.domain.entity.Vehiculo
 import kotlin.math.ceil
 
 class Parqueadero : CobroServicio {
-
+    var restringido = false
     private var listaVehiculo = arrayListOf<Vehiculo>()
     private val diaDeLaSemana = DiaDeLaSemana().diaSemana()
     private val diasPermitidos = arrayListOf("Domingo", "Lunes")
 
-    private fun restriccionIngreso(numeroPlaca: String): Boolean {
+    private fun restriccionIngreso(vehiculo: Vehiculo, diaDeLaSemana: String): Boolean {
 
-        var restringido = false
+        restringido = false
 
-        if (numeroPlaca.isEmpty()) {
+        if (vehiculo.numeroPlaca.isEmpty()) {
             restringido = true// todo mostrar mensaje que no es admitido
         } else {
-            if (numeroPlaca.first().uppercase() == LETRA_RESTRINGIDA) {
+            vehiculo.numeroPlaca.uppercase()
+            if (vehiculo.numeroPlaca.first().uppercase() == LETRA_RESTRINGIDA) {
                 restringido = !diasPermitidos.contains(diaDeLaSemana)
             }
         }
         return restringido
     }
 
-    fun ingresoVehiculos(vehiculo: Vehiculo) {
+    fun ingresoVehiculos(vehiculo: Vehiculo,diaDeLaSemana: String) {
+
         var hayCupo = false
 
         when (vehiculo) {
@@ -39,7 +41,7 @@ class Parqueadero : CobroServicio {
             }
         }
 
-        if (restriccionIngreso(vehiculo.numeroPlaca) && hayCupo) {
+        if (restriccionIngreso(vehiculo,diaDeLaSemana) && hayCupo) {
             listaVehiculo.add(vehiculo)
         }
 
