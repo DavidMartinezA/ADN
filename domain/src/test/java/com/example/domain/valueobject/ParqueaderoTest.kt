@@ -2,6 +2,7 @@ package com.example.domain.valueobject
 
 import com.example.domain.aggregate.Parqueadero
 import com.example.domain.entity.Carro
+import com.example.domain.entity.Moto
 import com.example.domain.entity.Vehiculo
 
 import org.junit.Test
@@ -13,8 +14,7 @@ class ParqueaderoTest {
 
         val ingresoParqueadero = Parqueadero()
         val carroJuan: Vehiculo = Carro("HSU531")
-        ingresoParqueadero.ingresoVehiculos(carroJuan,"Domingo")
-        val restringido = ingresoParqueadero.restringido
+        val restringido = ingresoParqueadero.ingresoVehiculos(carroJuan, "Domingo")
         assert(!restringido)
     }
 
@@ -23,8 +23,7 @@ class ParqueaderoTest {
 
         val ingresoParqueadero = Parqueadero()
         val carroJuan: Vehiculo = Carro("")
-        ingresoParqueadero.ingresoVehiculos(carroJuan,"Domingo")
-        val restringido = ingresoParqueadero.restringido
+        val restringido = ingresoParqueadero.ingresoVehiculos(carroJuan, "Domingo")
         assert(restringido)
     }
 
@@ -33,8 +32,7 @@ class ParqueaderoTest {
 
         val ingresoParqueadero = Parqueadero()
         val carroJuan: Vehiculo = Carro("HSU531")
-        ingresoParqueadero.ingresoVehiculos(carroJuan,"domingo")
-        val restringido = ingresoParqueadero.restringido
+        val restringido = ingresoParqueadero.ingresoVehiculos(carroJuan, "domingo")
         assert(!restringido)
     }
 
@@ -43,8 +41,7 @@ class ParqueaderoTest {
 
         val ingresoParqueadero = Parqueadero()
         val carroJuan: Vehiculo = Carro("hsu531")
-        ingresoParqueadero.ingresoVehiculos(carroJuan,"domingo")
-        val restringido = ingresoParqueadero.restringido
+        val restringido = ingresoParqueadero.ingresoVehiculos(carroJuan, "domingo")
         assert(!restringido)
     }
 
@@ -53,35 +50,71 @@ class ParqueaderoTest {
 
         val ingresoParqueadero = Parqueadero()
         val carroJuan: Vehiculo = Carro("Asu531")
-        ingresoParqueadero.ingresoVehiculos(carroJuan,"Domingo")
-        val restringido = ingresoParqueadero.restringido
+        val restringido = ingresoParqueadero.ingresoVehiculos(carroJuan, "Domingo")
         assert(!restringido)
     }
 
     @Test
-    fun ingresoVehiculos_DiaPermitidoDos_IngresoPermitido() {
+    fun ingresoVehiculos_DiaPermitidouno_IngresoPermitido() {
 
         val ingresoParqueadero = Parqueadero()
         val carroJuan: Vehiculo = Carro("Asu531")
-        ingresoParqueadero.ingresoVehiculos(carroJuan,"Lunes")
-        val restringido = ingresoParqueadero.restringido
+        val restringido = ingresoParqueadero.ingresoVehiculos(carroJuan, "Lunes")
         assert(!restringido)
     }
 
     @Test
-    fun ingresoVehiculos_DiaNoPermitidoDos_IngresoNoPermitido() {
+    fun ingresoVehiculos_DiaNoPermitido_IngresoNoPermitido() {
 
         val ingresoParqueadero = Parqueadero()
         val carroJuan: Vehiculo = Carro("Asu531")
-        ingresoParqueadero.ingresoVehiculos(carroJuan,"Martes")
-        val restringido = ingresoParqueadero.restringido
+        val restringido = ingresoParqueadero.ingresoVehiculos(carroJuan, "Jueves")
         assert(restringido)
     }
 
     @Test
-    fun cobroTarifaMoto() {
+    fun cobroTarifaMoto_TiempoEnHorasAltoCilindraje_TarifaParqueo() {
+
+        val parqueadero = Parqueadero()
+        val duracionServicioHoras = 8
+        val moto = Moto("hsu531", true)
+
+        val cobro = parqueadero.cobroTarifaMoto(duracionServicioHoras, moto)
+        assert(cobro == 6000)
     }
 
+    @Test
+    fun cobroTarifaMoto_TiempoEnHorasAltoCilindrajeFalse_TarifaParqueo() {
+
+        val parqueadero = Parqueadero()
+        val duracionServicioHoras = 8
+        val moto = Moto("hsu531", false)
+
+        val cobro = parqueadero.cobroTarifaMoto(duracionServicioHoras, moto)
+        assert(cobro == 4000)
+    }
+
+    @Test
+    fun cobroTarifaMoto_TiempoEnDiasAltoCilindrajeFalse_TarifaParqueo() {
+
+        val parqueadero = Parqueadero()
+        val duracionServicioHoras = 16
+        val moto = Moto("hsu531", false)
+
+        val cobro = parqueadero.cobroTarifaMoto(duracionServicioHoras, moto)
+        assert(cobro == 4000)
+    }
+
+    /* @Test
+     fun cobroTarifaMoto_TiempoEnDiasHorasAltoCilindrajeFalse_TarifaParqueo() {
+
+         val parqueadero = Parqueadero()
+         val duracionServicioHoras = 25
+         val moto = Moto("hsu531", false)
+
+         val cobro = parqueadero.cobroTarifaMoto(duracionServicioHoras,moto)
+         assert(cobro == 4000)
+     }*/
     @Test
     fun cobroTarifaCarro() {
     }

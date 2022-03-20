@@ -6,26 +6,34 @@ class CarroTest {
 
     @Test
     fun obtenerNumeroPlaca_NumeroPlacaCorrecto_NumeroPlacaNoVacio() {
-        var carroTestNumeroPlaca :Carro = Carro("HSU531")
-        var numeroPlaca =carroTestNumeroPlaca.numeroPlaca
+        val carroTestNumeroPlaca = Carro("HSU531")
+        val numeroPlaca = carroTestNumeroPlaca.numeroPlaca
 
         assert(numeroPlaca.isNotEmpty())
     }
 
     @Test
-    fun obtenerNumeroPlacaMayusculas_NumeroPlacaCorrectoMayusculas_NumeroPlacaMayusculas() {
-        var carroTestNumeroPlaca :Carro = Carro("HSU531")
-        var numeroPlaca =carroTestNumeroPlaca.numeroPlaca
+    fun obtenerNumeroPlaca_NumeroPlacaVacio_NumeroPlacaVacio() {
+        val carroTestNumeroPlaca = Carro("")
+        val numeroPlaca = carroTestNumeroPlaca.numeroPlaca
 
-        assert(numeroPlaca.equals(numeroPlaca.uppercase()))
+        assert(numeroPlaca.isEmpty())
     }
 
     @Test
-    fun obtenerNumeroPlacaMayusculas_NumeroPlacaCorrectoMinusculas_NumeroPlacaMayusculas() {
-        var carroTestNumeroPlaca :Carro = Carro("hsu531")
-        var numeroPlaca =carroTestNumeroPlaca.numeroPlaca
+    fun obtenerNumeroPlaca_NumeroPlacaCorrectoMayusculas_NumeroPlacaMayusculas() {
+        val carroTestNumeroPlaca = Carro("HSU531")
+        val numeroPlaca = carroTestNumeroPlaca.numeroPlaca
 
-        assert(numeroPlaca.equals(numeroPlaca.uppercase()))
+        assert(numeroPlaca == numeroPlaca.uppercase())
+    }
+
+    @Test
+    fun obtenerNumeroPlaca_NumeroPlacaCorrectoMinusculas_NumeroPlacaMayusculas() {
+        val carroTestNumeroPlaca = Carro("hsu531")
+        val numeroPlaca = carroTestNumeroPlaca.numeroPlaca
+
+        assert(numeroPlaca == numeroPlaca.uppercase())
     }
 
 

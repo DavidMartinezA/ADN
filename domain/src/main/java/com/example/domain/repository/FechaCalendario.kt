@@ -1,23 +1,21 @@
-package com.example.domain.valueobject
+package com.example.domain.repository
 
 
-import java.text.SimpleDateFormat
 import java.time.LocalDate
-import java.util.*
 
 class FechaCalendario {
 
     private lateinit var diaHoy: String
     private var diaSemana = LocalDate.now().dayOfWeek.name
     val formato = "yyyy/MM/dd HH:mm:ss"
-    private var fechaDeHoy= LocalDate.parse(formato).toString()
+    private var fechaDeHoy = LocalDate.parse(formato).toString()
 
 
-    fun obtenerFechaHoy ():String{
-    return fechaDeHoy
+    fun obtenerFechaHoy(): String {
+        return fechaDeHoy
     }
 
-    fun diaSemana(): String {
+    fun obtenerDiaSemana(): String {
 
         when (diaSemana) {
             "Monday" -> {

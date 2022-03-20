@@ -8,7 +8,7 @@ interface Ingreso {
 
     fun ingresoVehiculos(vehiculo: Vehiculo, diaSemana :String): Boolean
 
-    fun salidaVehiculos(vehiculo: Vehiculo): Boolean
+    fun salidaVehiculos(vehiculo: Vehiculo, duracionServicio: Int): Int
 
 
 }

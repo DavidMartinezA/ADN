@@ -5,15 +5,16 @@ import com.example.domain.entity.Moto
 import com.example.domain.entity.Vehiculo
 import com.example.domain.valueobject.CobroServicio
 import com.example.domain.valueobject.Ingreso
-import kotlin.math.ceil
 
-class Parqueadero() : CobroServicio, Ingreso{
+class Parqueadero : CobroServicio, Ingreso {
 
-    var restringido = false
+    private var tarifaTotal = 0
+    private var hayCupo = false
+    private var restringido = false
     private var listaVehiculo = arrayListOf<Vehiculo>()
     private val diasPermitidos = arrayListOf("Domingo", "Lunes")
 
-    override fun restriccionIngreso(vehiculo: Vehiculo, diaSemana :String): Boolean {
+    override fun restriccionIngreso(vehiculo: Vehiculo, diaSemana: String): Boolean {
 
         restringido = false
 
@@ -24,17 +25,14 @@ class Parqueadero() : CobroServicio, Ingreso{
             vehiculo.numeroPlaca.uppercase()
             if (vehiculo.numeroPlaca.first().uppercase() == LETRA_RESTRINGIDA) {
                 restringido = !diasPermitidos.contains(diaSemana)
-                    /*val alertas = CreadorAlertas()
-                     alertas.mostrarDialogoAlerta(context,"Error","Informacion NO Valida")*/
-                }
+            }
         }
         return restringido
     }
 
-    override fun ingresoVehiculos(vehiculo: Vehiculo, diaSemana :String ): Boolean {
+    override fun ingresoVehiculos(vehiculo: Vehiculo, diaSemana: String): Boolean {
 
-        var hayCupo = false
-
+        var vehiculoIngresado = false
         when (vehiculo) {
             is Carro -> {
                 val cuantosCarros = listaVehiculo.filterIsInstance<Carro>().size
@@ -46,18 +44,60 @@ class Parqueadero() : CobroServicio, Ingreso{
             }
         }
 
-        if (restriccionIngreso(vehiculo,diaSemana ) && hayCupo && !restringido){
+        if (restriccionIngreso(vehiculo, diaSemana) && hayCupo) {
             listaVehiculo.add(vehiculo)
+            vehiculoIngresado = true
         }
-        return hayCupo
+
+        return vehiculoIngresado
     }
 
-    override fun cobroTarifaMoto(duracionServicio: Double, moto: Moto): Int {
+    override fun salidaVehiculos(vehiculo: Vehiculo, duracionServicio: Int): Int {
 
-        var tarifaParqueoTotal: Int = if (duracionServicio < 9) {
-            duracionServicio.toInt() * VALOR_HORA_MOTO
+
+        if (listaVehiculo.contains(vehiculo)) {
+
+            tarifaTotal = when (vehiculo) {
+                is Moto -> {
+                    cobroTarifaMoto(duracionServicio, vehiculo)
+                }
+                is Carro -> {
+                    cobroTarifaCarro(duracionServicio, vehiculo)
+                }
+                else -> {
+                    0
+                }
+            }
+            listaVehiculo.remove(vehiculo)
+
         } else {
-            ((duracionServicio / 24) * VALOR_DIA_MOTO).toInt()
+            tarifaTotal = 0
+
+        }
+
+        return tarifaTotal
+    }
+
+    override fun cobroTarifaMoto(duracionServicio: Int, moto: Moto): Int {
+
+        var tarifaParqueoTotal: Int
+
+        when (duracionServicio) {
+            in 0..9 -> {
+                tarifaParqueoTotal = duracionServicio * VALOR_HORA_MOTO
+            }
+            in 9..24 -> {
+                tarifaParqueoTotal = VALOR_DIA_MOTO
+            }
+            else -> {
+                val calculoCobro = (duracionServicio / 24.0).toString()
+                var diasCobro = calculoCobro[0].toInt()
+                var horasCobro = calculoCobro[2].toInt()
+                diasCobro *= VALOR_DIA_MOTO
+                horasCobro *= VALOR_HORA_MOTO
+
+                tarifaParqueoTotal = diasCobro + horasCobro
+            }
 
         }
         if (moto.cilindrajeAlto) {
@@ -66,22 +106,28 @@ class Parqueadero() : CobroServicio, Ingreso{
         return tarifaParqueoTotal
     }
 
-    override fun cobroTarifaCarro(duracionServicio: Double, carro: Carro): Int {
+    override fun cobroTarifaCarro(duracionServicio: Int, carro: Carro): Int {
 
-        val fraccionDias = 24.0 / duracionServicio
-        ceil(fraccionDias)
+        val tarifaParqueoTotal: Int
 
-        val tarifaParqueoTotal: Int = if (duracionServicio < 9) {
-            duracionServicio.toInt() * VALOR_HORA_CARRO
-        } else {
-            (fraccionDias * VALOR_DIA_CARRO).toInt()
+        when (duracionServicio) {
+            in 0..9 -> {
+                tarifaParqueoTotal = duracionServicio * VALOR_HORA_CARRO
+            }
+            in 9..24 -> {
+                tarifaParqueoTotal = VALOR_DIA_CARRO
+            }
+            else -> {
+                val calculoCobro = (duracionServicio / 24.0).toString()
+                var diasCobro = calculoCobro[0].toInt()
+                var horasCobro = calculoCobro[2].toInt()
+                diasCobro *= VALOR_DIA_CARRO
+                horasCobro *= VALOR_HORA_CARRO
+
+                tarifaParqueoTotal = diasCobro + horasCobro
+            }
         }
         return tarifaParqueoTotal
-    }
-
-    override fun salidaVehiculos(vehiculo: Vehiculo): Boolean {
-        listaVehiculo.remove(vehiculo)
-        return true
     }
 
     companion object {
