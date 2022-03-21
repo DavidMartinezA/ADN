@@ -6,7 +6,7 @@ import java.time.LocalDate
 class FechaCalendario {
 
     private lateinit var diaHoy: String
-    private var diaSemana = LocalDate.now().dayOfWeek.name
+    var diaSemana = LocalDate.now().dayOfWeek.name
     val formato = "yyyy/MM/dd HH:mm:ss"
     private var fechaDeHoy = LocalDate.parse(formato).toString()
 

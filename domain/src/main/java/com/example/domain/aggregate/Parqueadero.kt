@@ -11,7 +11,7 @@ class Parqueadero : CobroServicio, Ingreso {
     private var tarifaTotal = 0
     private var hayCupo = false
     private var restringido = false
-    private var listaVehiculo = arrayListOf<Vehiculo>()
+    var listaVehiculo = ArrayList<Vehiculo>()
     private val diasPermitidos = arrayListOf("Domingo", "Lunes")
 
     override fun restriccionIngreso(vehiculo: Vehiculo, diaSemana: String): Boolean {
@@ -83,25 +83,31 @@ class Parqueadero : CobroServicio, Ingreso {
         var tarifaParqueoTotal: Int
 
         when (duracionServicio) {
-            in 0..9 -> {
+            in 0..8 -> {
                 tarifaParqueoTotal = duracionServicio * VALOR_HORA_MOTO
             }
             in 9..24 -> {
                 tarifaParqueoTotal = VALOR_DIA_MOTO
             }
             else -> {
-                val calculoCobro = (duracionServicio / 24.0).toString()
-                var diasCobro = calculoCobro[0].toInt()
-                var horasCobro = calculoCobro[2].toInt()
+                val calculoCobro = (duracionServicio / HORAS_DIA).toString()
+                var diasCobro = calculoCobro[0].toString().toInt()
+                val diasEnHoras = diasCobro * HORAS_DIA
+                var horasCobro = duracionServicio - diasEnHoras
+
+                if (horasCobro >= 9) {
+                    horasCobro = VALOR_DIA_MOTO
+                } else {
+                    horasCobro *= VALOR_HORA_MOTO
+                }
                 diasCobro *= VALOR_DIA_MOTO
-                horasCobro *= VALOR_HORA_MOTO
 
                 tarifaParqueoTotal = diasCobro + horasCobro
             }
 
         }
         if (moto.cilindrajeAlto) {
-            tarifaParqueoTotal += 2000
+            tarifaParqueoTotal += COBRO_ALTO_CILINDRAJE
         }
         return tarifaParqueoTotal
     }
@@ -111,18 +117,25 @@ class Parqueadero : CobroServicio, Ingreso {
         val tarifaParqueoTotal: Int
 
         when (duracionServicio) {
-            in 0..9 -> {
+            in 0..8 -> {
                 tarifaParqueoTotal = duracionServicio * VALOR_HORA_CARRO
             }
-            in 9..24 -> {
+            in 9..25 -> {
                 tarifaParqueoTotal = VALOR_DIA_CARRO
             }
             else -> {
-                val calculoCobro = (duracionServicio / 24.0).toString()
-                var diasCobro = calculoCobro[0].toInt()
-                var horasCobro = calculoCobro[2].toInt()
+                val calculoCobro = (duracionServicio / HORAS_DIA).toString()
+                var diasCobro = calculoCobro[0].toString().toInt()
+                val diasEnHoras = diasCobro * HORAS_DIA
+                var horasCobro = duracionServicio - diasEnHoras
+
+                if (horasCobro >= 9) {
+                    horasCobro = VALOR_DIA_CARRO
+                } else {
+                    horasCobro *= VALOR_HORA_CARRO
+                }
                 diasCobro *= VALOR_DIA_CARRO
-                horasCobro *= VALOR_HORA_CARRO
+
 
                 tarifaParqueoTotal = diasCobro + horasCobro
             }
@@ -139,6 +152,8 @@ class Parqueadero : CobroServicio, Ingreso {
         const val VALOR_DIA_MOTO = 4000
         const val VALOR_HORA_CARRO = 1000
         const val VALOR_DIA_CARRO = 8000
+        const val COBRO_ALTO_CILINDRAJE = 2000
+        const val HORAS_DIA = 24
 
     }
 }
