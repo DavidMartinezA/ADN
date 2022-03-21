@@ -1,10 +1,8 @@
-package com.example.domain.valueobject
+package com.example.domain.aggregate
 
-import com.example.domain.aggregate.Parqueadero
 import com.example.domain.entity.Carro
 import com.example.domain.entity.Moto
 import com.example.domain.entity.Vehiculo
-
 import org.junit.Test
 
 class ParqueaderoTest {
