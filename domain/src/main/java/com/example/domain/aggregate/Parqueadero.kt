@@ -22,7 +22,7 @@ class Parqueadero : CobroServicio, Ingreso {
             restringido = true
 
         } else {
-            vehiculo.numeroPlaca.uppercase()
+            vehiculo.numeroPlaca.uppercase() // verificar
             if (vehiculo.numeroPlaca.first().uppercase() == LETRA_RESTRINGIDA) {
                 restringido = !diasPermitidos.contains(diaSemana)
             }
@@ -81,7 +81,7 @@ class Parqueadero : CobroServicio, Ingreso {
     override fun cobroTarifaMoto(duracionServicio: Int, moto: Moto): Int {
 
         var tarifaParqueoTotal: Int
-
+        //todo duracion de servicio < 0 retorne tal
         when (duracionServicio) {
             in 0..8 -> {
                 tarifaParqueoTotal = duracionServicio * VALOR_HORA_MOTO
@@ -89,7 +89,7 @@ class Parqueadero : CobroServicio, Ingreso {
             in 9..24 -> {
                 tarifaParqueoTotal = VALOR_DIA_MOTO
             }
-            else -> {
+            else -> { // edge case
                 val calculoCobro = (duracionServicio / HORAS_DIA).toString()
                 var diasCobro = calculoCobro[0].toString().toInt()
                 val diasEnHoras = diasCobro * HORAS_DIA
