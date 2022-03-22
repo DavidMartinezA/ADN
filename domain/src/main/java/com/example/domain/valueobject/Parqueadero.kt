@@ -78,66 +78,74 @@ class Parqueadero : CobroServicio, Ingreso {
     }
 
     override fun cobroTarifaMoto(duracionServicio: Int, moto: Moto): Int {
-
         var tarifaParqueoTotal: Int
-        //todo duracion de servicio < 0 retorne tal
-        when (duracionServicio) {
-            in 0..8 -> {
-                tarifaParqueoTotal = duracionServicio * VALOR_HORA_MOTO
-            }
-            in 9..24 -> {
-                tarifaParqueoTotal = VALOR_DIA_MOTO
-            }
-            else -> { // edge case
-                val calculoCobro = (duracionServicio / HORAS_DIA).toString()
-                var diasCobro = calculoCobro[0].toString().toInt()
-                val diasEnHoras = diasCobro * HORAS_DIA
-                var horasCobro = duracionServicio - diasEnHoras
 
-                if (horasCobro >= 9) {
-                    horasCobro = VALOR_DIA_MOTO
-                } else {
-                    horasCobro *= VALOR_HORA_MOTO
+        if (duracionServicio > 0) {
+            when (duracionServicio) {
+                in 0..8 -> {
+                    tarifaParqueoTotal = duracionServicio * VALOR_HORA_MOTO
                 }
-                diasCobro *= VALOR_DIA_MOTO
+                in 9..24 -> {
+                    tarifaParqueoTotal = VALOR_DIA_MOTO
+                }
+                else -> { // edge case
+                    val calculoCobro = (duracionServicio / HORAS_DIA).toString()
+                    var diasCobro = calculoCobro[0].toString().toInt()
+                    val diasEnHoras = diasCobro * HORAS_DIA
+                    var horasCobro = duracionServicio - diasEnHoras
 
-                tarifaParqueoTotal = diasCobro + horasCobro
+                    if (horasCobro >= 9) {
+                        horasCobro = VALOR_DIA_MOTO
+                    } else {
+                        horasCobro *= VALOR_HORA_MOTO
+                    }
+                    diasCobro *= VALOR_DIA_MOTO
+
+                    tarifaParqueoTotal = diasCobro + horasCobro
+                }
+
+            }
+            if (moto.cilindrajeAlto) {
+                tarifaParqueoTotal += COBRO_ALTO_CILINDRAJE
             }
 
-        }
-        if (moto.cilindrajeAlto) {
-            tarifaParqueoTotal += COBRO_ALTO_CILINDRAJE
+        } else {
+            tarifaParqueoTotal = 0
+
         }
         return tarifaParqueoTotal
     }
 
     override fun cobroTarifaCarro(duracionServicio: Int, carro: Carro): Int {
-
         val tarifaParqueoTotal: Int
 
-        when (duracionServicio) {
-            in 0..8 -> {
-                tarifaParqueoTotal = duracionServicio * VALOR_HORA_CARRO
-            }
-            in 9..25 -> {
-                tarifaParqueoTotal = VALOR_DIA_CARRO
-            }
-            else -> {
-                val calculoCobro = (duracionServicio / HORAS_DIA).toString()
-                var diasCobro = calculoCobro[0].toString().toInt()
-                val diasEnHoras = diasCobro * HORAS_DIA
-                var horasCobro = duracionServicio - diasEnHoras
-
-                if (horasCobro >= 9) {
-                    horasCobro = VALOR_DIA_CARRO
-                } else {
-                    horasCobro *= VALOR_HORA_CARRO
+        if (duracionServicio > 0) {
+            when (duracionServicio) {
+                in 0..8 -> {
+                    tarifaParqueoTotal = duracionServicio * VALOR_HORA_CARRO
                 }
-                diasCobro *= VALOR_DIA_CARRO
+                in 9..25 -> {
+                    tarifaParqueoTotal = VALOR_DIA_CARRO
+                }
+                else -> {
+                    val calculoCobro = (duracionServicio / HORAS_DIA).toString()
+                    var diasCobro = calculoCobro[0].toString().toInt()
+                    val diasEnHoras = diasCobro * HORAS_DIA
+                    var horasCobro = duracionServicio - diasEnHoras
+
+                    if (horasCobro >= 9) {
+                        horasCobro = VALOR_DIA_CARRO
+                    } else {
+                        horasCobro *= VALOR_HORA_CARRO
+                    }
+                    diasCobro *= VALOR_DIA_CARRO
 
 
-                tarifaParqueoTotal = diasCobro + horasCobro
+                    tarifaParqueoTotal = diasCobro + horasCobro
+                }
             }
+        } else {
+            tarifaParqueoTotal = 0
         }
         return tarifaParqueoTotal
     }

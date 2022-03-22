@@ -228,6 +228,20 @@ class ParqueaderoTest {
     }
 
     @Test
+    fun salidaVehiculos_HorasValorNegativoCarro_tarifaParqueo() {
+
+        //Arrange
+        val parqueadero = Parqueadero()
+        val duracionServicioHoras = -10
+        val carro = Carro("hsu531")
+        parqueadero.listaVehiculoCarro.add(carro)
+        //Act
+        val tarifa = parqueadero.salidaVehiculos(carro, duracionServicioHoras)
+        //Assert
+        assert(tarifa == 0)
+    }
+
+    @Test
     fun salidaVehiculos_SalidaMotoDias_tarifaParqueo() {
 
         //Arrange
@@ -309,5 +323,19 @@ class ParqueaderoTest {
         val tarifa = parqueadero.salidaVehiculos(moto, duracionServicioHoras)
         //Assert
         assert(tarifa == 3000)
+    }
+
+    @Test
+    fun salidaVehiculos_HorasValorNegativoMoto_tarifaParqueo() {
+
+        //Arrange
+        val parqueadero = Parqueadero()
+        val duracionServicioHoras = -2
+        val moto = Moto("hsu531", false)
+        parqueadero.listaVehiculoMoto.add(moto)
+        //Act
+        val tarifa = parqueadero.salidaVehiculos(moto, duracionServicioHoras)
+        //Assert
+        assert(tarifa == 0)
     }
 }
