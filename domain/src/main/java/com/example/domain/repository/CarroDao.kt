@@ -9,10 +9,10 @@ import com.example.domain.entity.Carro
 @Dao
 interface CarroDao {
     @Insert
-    fun insertVehiculo(vararg vehiculo: Carro)
+    fun insertVehiculoCarro(vararg carro: Carro)
 
     @Delete
-    suspend fun deleteVehiculo(vehiculo: Carro)
+    suspend fun deleteVehiculoCarro(Carro: Carro)
 
     @Query("SELECT * FROM Carro")
     suspend fun getAllCarros(): List<Carro>
