@@ -1,4 +1,4 @@
-package com.example.domain.repository
+package com.example.insfrastructure
 
 import androidx.room.Dao
 import androidx.room.Delete

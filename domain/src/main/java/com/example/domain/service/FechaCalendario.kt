@@ -1,4 +1,4 @@
-package com.example.domain.repository
+package com.example.domain.service
 
 
 import java.time.LocalDate
@@ -9,7 +9,6 @@ class FechaCalendario {
     var diaSemana = LocalDate.now().dayOfWeek.name
     val formato = "yyyy/MM/dd HH:mm:ss"
     private var fechaDeHoy = LocalDate.parse(formato).toString()
-
 
     fun obtenerFechaHoy(): String {
         return fechaDeHoy

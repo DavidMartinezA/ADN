@@ -1,17 +1,16 @@
-package com.example.domain.aggregate
+package com.example.domain.valueobject
 
 import com.example.domain.entity.Carro
 import com.example.domain.entity.Moto
 import com.example.domain.entity.Vehiculo
-import com.example.domain.valueobject.CobroServicio
-import com.example.domain.valueobject.Ingreso
 
 class Parqueadero : CobroServicio, Ingreso {
 
     private var tarifaTotal = 0
     private var hayCupo = false
     private var restringido = false
-    var listaVehiculo = ArrayList<Vehiculo>()
+    var listaVehiculoCarro = ArrayList<Carro>()
+    var listaVehiculoMoto = ArrayList<Moto>()
     private val diasPermitidos = arrayListOf("Domingo", "Lunes")
 
     override fun restriccionIngreso(vehiculo: Vehiculo, diaSemana: String): Boolean {
@@ -22,8 +21,7 @@ class Parqueadero : CobroServicio, Ingreso {
             restringido = true
 
         } else {
-            vehiculo.numeroPlaca.uppercase() // verificar
-            if (vehiculo.numeroPlaca.first().uppercase() == LETRA_RESTRINGIDA) {
+            if (vehiculo.numeroPlaca.first() == LETRA_RESTRINGIDA) {
                 restringido = !diasPermitidos.contains(diaSemana)
             }
         }
@@ -35,46 +33,47 @@ class Parqueadero : CobroServicio, Ingreso {
         var vehiculoIngresado = false
         when (vehiculo) {
             is Carro -> {
-                val cuantosCarros = listaVehiculo.filterIsInstance<Carro>().size
+                val cuantosCarros = listaVehiculoCarro.size
                 hayCupo = cuantosCarros <= LIMITE_CARRO
+                if (restriccionIngreso(vehiculo, diaSemana) && hayCupo) {
+                    listaVehiculoCarro.add(vehiculo)
+                    vehiculoIngresado = true
+                }
             }
             is Moto -> {
-                val cuantasMotos = listaVehiculo.filterIsInstance<Moto>().size
+                val cuantasMotos = listaVehiculoMoto.size
                 hayCupo = cuantasMotos <= LIMITE_MOTO
+                if (restriccionIngreso(vehiculo, diaSemana) && hayCupo) {
+                    listaVehiculoMoto.add(vehiculo)
+                    vehiculoIngresado = true
+                }
             }
-        }
-
-        if (restriccionIngreso(vehiculo, diaSemana) && hayCupo) {
-            listaVehiculo.add(vehiculo)
-            vehiculoIngresado = true
+            else -> {
+                vehiculoIngresado = false
+            }
         }
 
         return vehiculoIngresado
     }
 
     override fun salidaVehiculos(vehiculo: Vehiculo, duracionServicio: Int): Int {
-
-
-        if (listaVehiculo.contains(vehiculo)) {
-
-            tarifaTotal = when (vehiculo) {
-                is Moto -> {
-                    cobroTarifaMoto(duracionServicio, vehiculo)
-                }
-                is Carro -> {
-                    cobroTarifaCarro(duracionServicio, vehiculo)
-                }
-                else -> {
-                    0
+        when (vehiculo) {
+            is Moto -> {
+                if (listaVehiculoMoto.contains(vehiculo)) {
+                    tarifaTotal = cobroTarifaMoto(duracionServicio, vehiculo)
+                    listaVehiculoMoto.remove(vehiculo)
                 }
             }
-            listaVehiculo.remove(vehiculo)
-
-        } else {
-            tarifaTotal = 0
-
+            is Carro -> {
+                if (listaVehiculoCarro.contains(vehiculo)) {
+                    tarifaTotal = cobroTarifaCarro(duracionServicio, vehiculo)
+                    listaVehiculoCarro.remove(vehiculo)
+                }
+            }
+            else -> {
+                tarifaTotal = 0
+            }
         }
-
         return tarifaTotal
     }
 
@@ -145,7 +144,7 @@ class Parqueadero : CobroServicio, Ingreso {
 
     companion object {
 
-        const val LETRA_RESTRINGIDA = "A"
+        const val LETRA_RESTRINGIDA = 'A'
         const val LIMITE_MOTO = 10
         const val LIMITE_CARRO = 20
         const val VALOR_HORA_MOTO = 500

@@ -1,4 +1,4 @@
-package com.example.domain.aggregate
+package com.example.domain.valueobject
 
 import com.example.domain.entity.Carro
 import com.example.domain.entity.Moto
@@ -191,7 +191,7 @@ class ParqueaderoTest {
         val parqueadero = Parqueadero()
         val duracionServicioHoras = 6
         val carro = Carro("hsu531")
-        parqueadero.listaVehiculo.add(carro)
+        parqueadero.listaVehiculoCarro.add(carro)
         //Act
         val tarifa = parqueadero.salidaVehiculos(carro, duracionServicioHoras)
         //Assert
@@ -205,7 +205,7 @@ class ParqueaderoTest {
         val parqueadero = Parqueadero()
         val duracionServicioHoras = 60
         val carro = Carro("hsu531")
-        parqueadero.listaVehiculo.add(carro)
+        parqueadero.listaVehiculoCarro.add(carro)
         //Act
         val tarifa = parqueadero.salidaVehiculos(carro, duracionServicioHoras)
         //Assert
@@ -220,7 +220,7 @@ class ParqueaderoTest {
         val parqueadero = Parqueadero()
         val duracionServicioHoras = 9
         val carro = Carro("hsu531")
-        parqueadero.listaVehiculo.add(carro)
+        parqueadero.listaVehiculoCarro.add(carro)
         //Act
         val tarifa = parqueadero.salidaVehiculos(carro, duracionServicioHoras)
         //Assert
@@ -234,7 +234,7 @@ class ParqueaderoTest {
         val parqueadero = Parqueadero()
         val duracionServicioHoras = 58
         val moto = Moto("hsu531")
-        parqueadero.listaVehiculo.add(moto)
+        parqueadero.listaVehiculoMoto.add(moto)
         //Act
         val tarifa = parqueadero.salidaVehiculos(moto, duracionServicioHoras)
         //Assert
@@ -248,7 +248,7 @@ class ParqueaderoTest {
         val parqueadero = Parqueadero()
         val duracionServicioHoras = 58
         val moto = Moto("hsu531", true)
-        parqueadero.listaVehiculo.add(moto)
+        parqueadero.listaVehiculoMoto.add(moto)
         //Act
         val tarifa = parqueadero.salidaVehiculos(moto, duracionServicioHoras)
         //Assert
@@ -262,7 +262,7 @@ class ParqueaderoTest {
         val parqueadero = Parqueadero()
         val duracionServicioHoras = 9
         val moto = Moto("hsu531")
-        parqueadero.listaVehiculo.add(moto)
+        parqueadero.listaVehiculoMoto.add(moto)
         //Act
         val tarifa = parqueadero.salidaVehiculos(moto, duracionServicioHoras)
         //Assert
@@ -276,7 +276,7 @@ class ParqueaderoTest {
         val parqueadero = Parqueadero()
         val duracionServicioHoras = 9
         val moto = Moto("hsu531", true)
-        parqueadero.listaVehiculo.add(moto)
+        parqueadero.listaVehiculoMoto.add(moto)
         //Act
         val tarifa = parqueadero.salidaVehiculos(moto, duracionServicioHoras)
         //Assert
@@ -290,7 +290,7 @@ class ParqueaderoTest {
         val parqueadero = Parqueadero()
         val duracionServicioHoras = 6
         val moto = Moto("hsu531", true)
-        parqueadero.listaVehiculo.add(moto)
+        parqueadero.listaVehiculoMoto.add(moto)
         //Act
         val tarifa = parqueadero.salidaVehiculos(moto, duracionServicioHoras)
         //Assert
@@ -304,7 +304,7 @@ class ParqueaderoTest {
         val parqueadero = Parqueadero()
         val duracionServicioHoras = 6
         val moto = Moto("hsu531", false)
-        parqueadero.listaVehiculo.add(moto)
+        parqueadero.listaVehiculoMoto.add(moto)
         //Act
         val tarifa = parqueadero.salidaVehiculos(moto, duracionServicioHoras)
         //Assert
