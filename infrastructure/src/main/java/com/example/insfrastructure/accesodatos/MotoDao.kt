@@ -1,4 +1,4 @@
-package com.example.domain.repository
+package com.example.insfrastructure.accesodatos
 
 import androidx.room.Dao
 import androidx.room.Delete
@@ -14,6 +14,6 @@ interface MotoDao {
     @Delete
     suspend fun deleteVehiculoMoto(moto: Moto)
 
-    @Query("SELECT * FROM Moto")
+    @Query("SELECT * FROM MotoDto")
     suspend fun getAllMotos(): List<Moto>
 }
