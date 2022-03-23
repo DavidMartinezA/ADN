@@ -4,5 +4,5 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 
 @Entity
-class EntidadBaseDatosMoto(@PrimaryKey var numeroPlaca: String, var cilindrajeAlto: Boolean) {
+class EntidadDatosMoto(@PrimaryKey var numeroPlaca: String, var cilindrajeAlto: Boolean) {
 }
