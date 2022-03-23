@@ -6,8 +6,8 @@ import com.example.domain.entity.Vehiculo
 
 class Parqueadero : CobroServicio, Ingreso {
 
-    var tarifaTotal = 0
-    var tarifaParqueoTotal = 0
+    private var tarifaTotal = 0
+    private var tarifaParqueoTotal = 0
     private var hayCupo = false
     private var restringido = false
     var listaVehiculoCarro = ArrayList<Carro>()
@@ -88,7 +88,7 @@ class Parqueadero : CobroServicio, Ingreso {
                 in 9..24 -> {
                     tarifaParqueoTotal = VALOR_DIA_MOTO
                 }
-                in 25..216 -> { // edge case
+                in 25..216 -> {
                     val calculoCobro = (duracionServicio / HORAS_EN_EL_DIA).toString()
                     var diasCobro = calculoCobro[0].toString().toInt()
                     val diasEnHoras = diasCobro * HORAS_EN_EL_DIA

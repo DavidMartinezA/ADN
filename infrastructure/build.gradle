@@ -45,7 +45,8 @@ dependencies {
     implementation project(path: ':domain')
 
     // Room
-    implementation "androidx.room:room-ktx:2.4.2"
-    implementation 'androidx.room:room-common:2.4.2'
+    api "androidx.room:room-ktx:2.4.2"
+    api 'androidx.room:room-common:2.4.2'
+    kapt "androidx.room:room-compiler:2.4.2"
 
 }

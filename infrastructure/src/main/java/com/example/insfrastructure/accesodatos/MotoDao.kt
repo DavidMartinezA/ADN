@@ -1,19 +1,16 @@
 package com.example.insfrastructure.accesodatos
 
-import androidx.room.Dao
-import androidx.room.Delete
-import androidx.room.Insert
-import androidx.room.Query
-import com.example.domain.entity.Moto
+import androidx.room.*
+import com.example.insfrastructure.accesodatos.entidadesbasedatos.EntidadBaseDatosMoto
 
 @Dao
 interface MotoDao {
-    @Insert
-    fun insertVehiculoMoto(vararg moto: Moto)
+    @Insert(onConflict = OnConflictStrategy.IGNORE)
+    suspend fun insertVehiculoMoto(moto: EntidadBaseDatosMoto)
 
     @Delete
-    suspend fun deleteVehiculoMoto(moto: Moto)
+    suspend fun deleteVehiculoMoto(moto: EntidadBaseDatosMoto)
 
-    @Query("SELECT * FROM MotoDto")
-    suspend fun getAllMotos(): List<Moto>
+    @Query("SELECT * FROM EntidadBaseDatosMoto")
+    suspend fun getAllMotos(): List<EntidadBaseDatosMoto>
 }
