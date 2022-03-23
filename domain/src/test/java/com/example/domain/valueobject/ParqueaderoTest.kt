@@ -145,7 +145,7 @@ class ParqueaderoTest {
     }
 
     @Test
-    fun cobroTarifaCarro_TiempoUnDia_TarifaParqueo() {
+    fun cobroTarifaCarro_TiempoUnDiaCarro_TarifaParqueo() {
 
         //Arrange
         val parqueadero = Parqueadero()
@@ -158,7 +158,7 @@ class ParqueaderoTest {
     }
 
     @Test
-    fun cobroTarifaCarro_TiempoEnHoras_TarifaParqueo() {
+    fun cobroTarifaCarro_TiempoEnHorasCarro_TarifaParqueo() {
 
         //Arrange
         val parqueadero = Parqueadero()
@@ -171,16 +171,16 @@ class ParqueaderoTest {
     }
 
     @Test
-    fun cobroTarifaCarro_TiempoEnDias_TarifaParqueo() {
+    fun cobroTarifaCarro_TiempoEnDiasCarro_TarifaParqueo() {
 
         //Arrange
         val parqueadero = Parqueadero()
-        val duracionServicioHoras = 50
+        val duracionServicioHoras = 245
         val carro = Carro("hsu531")
         //Act
         val cobro = parqueadero.cobroTarifaCarro(duracionServicioHoras, carro)
         //Assert
-        assert(cobro == 18000)
+        assert(cobro == 85000)
     }
 
 
@@ -242,17 +242,31 @@ class ParqueaderoTest {
     }
 
     @Test
+    fun salidaVehiculos_HorasEgdeCaseCarro_tarifaParqueo() {
+
+        //Arrange
+        val parqueadero = Parqueadero()
+        val duracionServicioHoras = 1200
+        val carro = Carro("hsu531")
+        parqueadero.listaVehiculoCarro.add(carro)
+        //Act
+        val tarifa = parqueadero.salidaVehiculos(carro, duracionServicioHoras)
+        //Assert
+        assert(tarifa == 0)
+    }
+
+    @Test
     fun salidaVehiculos_SalidaMotoDias_tarifaParqueo() {
 
         //Arrange
         val parqueadero = Parqueadero()
-        val duracionServicioHoras = 58
+        val duracionServicioHoras = 242
         val moto = Moto("hsu531")
         parqueadero.listaVehiculoMoto.add(moto)
         //Act
         val tarifa = parqueadero.salidaVehiculos(moto, duracionServicioHoras)
         //Assert
-        assert(tarifa == 12000)
+        assert(tarifa == 41000)
     }
 
     @Test
@@ -331,6 +345,20 @@ class ParqueaderoTest {
         //Arrange
         val parqueadero = Parqueadero()
         val duracionServicioHoras = -2
+        val moto = Moto("hsu531", false)
+        parqueadero.listaVehiculoMoto.add(moto)
+        //Act
+        val tarifa = parqueadero.salidaVehiculos(moto, duracionServicioHoras)
+        //Assert
+        assert(tarifa == 0)
+    }
+
+    @Test
+    fun salidaVehiculos_HorasEdgeCaseMoto_tarifaParqueo() {
+
+        //Arrange
+        val parqueadero = Parqueadero()
+        val duracionServicioHoras = 1200
         val moto = Moto("hsu531", false)
         parqueadero.listaVehiculoMoto.add(moto)
         //Act
