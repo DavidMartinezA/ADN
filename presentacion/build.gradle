@@ -59,20 +59,20 @@ dependencies {
 // tarea para los reportes de analisis de codigo
 task jacocoTestReport(type: JacocoReport, dependsOn: [':presentacion:testDebugUnitTest',':dominio:testDebugUnitTest',':infraestructura:testDebugUnitTest']) {
 
-    def modulePresentation = project(':presentacion')
-    def moduleDomain = project(':dominio')
-    def moduleInfrastructure = project(':infraestructura')
+    def modulePresentacion = project(':presentacion')
+    def moduleDominio = project(':dominio')
+    def moduleInfraestructura = project(':infraestructura')
 
     def directoriesToCoverage = layout.files("$buildDir/tmp/kotlin-classes/debug",
-            "$modulePresentation.buildDir/tmp/kotlin-classes/debug",
-            "$moduleDomain.buildDir/tmp/kotlin-classes/debug",
-            "$moduleInfrastructure.buildDir/tmp/kotlin-classes/debug"
+            "$modulePresentacion.buildDir/tmp/kotlin-classes/debug",
+            "$moduleDominio.buildDir/tmp/kotlin-classes/debug",
+            "$moduleInfraestructura.buildDir/tmp/kotlin-classes/debug"
     )
 
     def mainSources = layout.files("$project.projectDir/src/main/java",
-            "$modulePresentation.projectDir/src/main/java",
-            "$moduleDomain.projectDir/src/main/java",
-            "$moduleInfrastructure.projectDir/src/main/java"
+            "$modulePresentacion.projectDir/src/main/java",
+            "$moduleDominio.projectDir/src/main/java",
+            "$moduleInfraestructura.projectDir/src/main/java"
     )
 
     def executionFilesFromConnectedAndroidTest = fileTree(
@@ -83,9 +83,9 @@ task jacocoTestReport(type: JacocoReport, dependsOn: [':presentacion:testDebugUn
     def executionFileForUnitTestInModule = "$buildDir/outputs/unit_test_code_coverage/debugUnitTest/testDebugUnitTest.exec"
 
     def executionFileForUnitTestInOtherModule =
-            "$modulePresentation.buildDir/jacoco/testDebugUnitTest.exec"
-            "$moduleDomain.buildDir/jacoco/testDebugUnitTest.exec"
-            "$moduleInfrastructure.buildDir/jacoco/testDebugUnitTest.exec"
+            "$modulePresentacion.buildDir/jacoco/testDebugUnitTest.exec"
+            "$moduleDominio.buildDir/jacoco/testDebugUnitTest.exec"
+            "$moduleInfraestructura.buildDir/jacoco/testDebugUnitTest.exec"
 
     def executionFiles = layout.files(
             executionFilesFromConnectedAndroidTest,

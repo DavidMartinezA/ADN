@@ -1,9 +1,9 @@
 package com.example.insfrastructure.accesodatos.repositorio
 
-import com.example.domain.entidad.Carro
-import com.example.domain.entidad.Moto
-import com.example.domain.entidad.Vehiculo
-import com.example.domain.repositorio.RepositorioVehiculo
+import com.example.dominio.modelo.Carro
+import com.example.dominio.modelo.Moto
+import com.example.dominio.modelo.Vehiculo
+import com.example.dominio.repositorio.RepositorioVehiculo
 import com.example.insfrastructure.accesodatos.anticorrupcion.CarroTranslator
 import com.example.insfrastructure.accesodatos.anticorrupcion.MotoTranslator
 import com.example.insfrastructure.accesodatos.basededatos.CarroDataBase

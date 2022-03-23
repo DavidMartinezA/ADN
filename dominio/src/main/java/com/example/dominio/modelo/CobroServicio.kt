@@ -1,7 +1,4 @@
-package com.example.domain.objetoDeValor
-
-import com.example.domain.entidad.Carro
-import com.example.domain.entidad.Moto
+package com.example.dominio.modelo
 
 interface CobroServicio { // todo segregacion de interfaces
 

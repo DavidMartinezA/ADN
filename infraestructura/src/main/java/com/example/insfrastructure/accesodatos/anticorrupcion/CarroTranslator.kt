@@ -1,6 +1,6 @@
 package com.example.insfrastructure.accesodatos.anticorrupcion
 
-import com.example.domain.entidad.Carro
+import com.example.dominio.modelo.Carro
 import com.example.insfrastructure.accesodatos.entidadesbasedatos.EntidadDatosCarro
 
 class CarroTranslator {

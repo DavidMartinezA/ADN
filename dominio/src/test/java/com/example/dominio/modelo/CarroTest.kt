@@ -1,4 +1,4 @@
-package com.example.domain.entidad
+package com.example.dominio.modelo
 
 import org.junit.Test
 
@@ -27,14 +27,5 @@ class CarroTest {
 
         assert(numeroPlaca == numeroPlaca.uppercase())
     }
-
-    @Test
-    fun obtenerNumeroPlaca_NumeroPlacaCorrectoMinusculas_NumeroPlacaMayusculas() {
-        val carroTestNumeroPlaca = Carro("hsu531")
-        val numeroPlaca = carroTestNumeroPlaca.identificacionVehiculo
-
-        assert(numeroPlaca == numeroPlaca.uppercase())
-    }
-
 
 }

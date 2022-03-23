@@ -1,6 +1,4 @@
-package com.example.domain.objetoDeValor
-
-import com.example.domain.entidad.Vehiculo
+package com.example.dominio.modelo
 
 interface Ingreso {
 

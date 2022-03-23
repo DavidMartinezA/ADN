@@ -1,8 +1,5 @@
-package com.example.domain.objetoDeValor
+package com.example.dominio.modelo
 
-import com.example.domain.entidad.Carro
-import com.example.domain.entidad.Moto
-import com.example.domain.entidad.Vehiculo
 import org.junit.Test
 
 class ParqueaderoTest {

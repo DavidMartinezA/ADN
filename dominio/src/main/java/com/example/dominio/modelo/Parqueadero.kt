@@ -1,8 +1,4 @@
-package com.example.domain.objetoDeValor
-
-import com.example.domain.entidad.Carro
-import com.example.domain.entidad.Moto
-import com.example.domain.entidad.Vehiculo
+package com.example.dominio.modelo
 
 class Parqueadero : CobroServicio, Ingreso {// todo responsabilidad unica
 

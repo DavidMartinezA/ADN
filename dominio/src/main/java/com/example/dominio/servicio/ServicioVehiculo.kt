@@ -1,9 +1,9 @@
-package com.example.domain.servicio
+package com.example.dominio.servicio
 
-import com.example.domain.entidad.Carro
-import com.example.domain.entidad.Moto
-import com.example.domain.entidad.Vehiculo
-import com.example.domain.repositorio.RepositorioVehiculo
+import com.example.dominio.modelo.Carro
+import com.example.dominio.modelo.Moto
+import com.example.dominio.modelo.Vehiculo
+import com.example.dominio.repositorio.RepositorioVehiculo
 
 class ServicioVehiculo(var repositorioVehiculo: RepositorioVehiculo) { // aplicar herencia
 
