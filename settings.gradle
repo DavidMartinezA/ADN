@@ -13,7 +13,6 @@ dependencyResolutionManagement {
     }
 }
 rootProject.name = "CeibaParqueadero"
-include ':presentation'
-include ':domain'
-include ':infrastructure'
-include ':application'
+include ':presentacion'
+include ':dominio'
+include ':infraestructura'
