@@ -1,4 +1,4 @@
-package com.example.insfrastructure.accesodatos
+package com.example.insfrastructure.accesodatos.dao
 
 import androidx.room.*
 import com.example.insfrastructure.accesodatos.entidadesbasedatos.EntidadDatosCarro
