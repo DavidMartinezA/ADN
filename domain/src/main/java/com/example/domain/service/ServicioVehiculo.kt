@@ -8,23 +8,23 @@ import com.example.domain.repository.RepositorioVehiculo
 class ServicioVehiculo(var repositorioVehiculo: RepositorioVehiculo) {
 
 
-    fun guardarVehiculo(vehiculo: Vehiculo): Boolean {
+    suspend fun guardarVehiculo(vehiculo: Vehiculo): Boolean {
         var vehiculoGuardado = false
 
         when (vehiculo) {
             is Carro -> {
-                vehiculoGuardado = if (repositorioVehiculo?.vehiculoExiste(vehiculo) == true) {
+                vehiculoGuardado = if (repositorioVehiculo.vehiculoExiste(vehiculo)) {
                     false
                 } else {
-                    repositorioVehiculo?.guardarCarro(vehiculo)
+                    repositorioVehiculo.guardarCarro(vehiculo)
                     true
                 }
             }
             is Moto -> {
-                vehiculoGuardado = if (repositorioVehiculo?.vehiculoExiste(vehiculo) == true) {
+                vehiculoGuardado = if (repositorioVehiculo.vehiculoExiste(vehiculo)) {
                     false
                 } else {
-                    repositorioVehiculo?.guardarMoto(vehiculo)
+                    repositorioVehiculo.guardarMoto(vehiculo)
                     true
                 }
             }

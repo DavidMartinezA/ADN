@@ -6,7 +6,7 @@ import com.example.insfrastructure.accesodatos.entidadesbasedatos.EntidadBaseDat
 @Dao
 interface MotoDao {
     @Insert(onConflict = OnConflictStrategy.IGNORE)
-    suspend fun insertVehiculoMoto(moto: EntidadBaseDatosMoto)
+    suspend fun insertVehiculoMoto(moto: com.example.domain.entity.Moto)
 
     @Delete
     suspend fun deleteVehiculoMoto(moto: EntidadBaseDatosMoto)

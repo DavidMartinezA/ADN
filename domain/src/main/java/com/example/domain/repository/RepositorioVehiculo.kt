@@ -6,11 +6,11 @@ import com.example.domain.entity.Vehiculo
 
 interface RepositorioVehiculo {
 
-    fun vehiculoExiste(vehiculo: Vehiculo): Boolean
+    suspend fun vehiculoExiste(vehiculo: Vehiculo): Boolean
 
-    fun guardarMoto(moto: Moto)
+    suspend fun guardarMoto(moto: Moto)
 
-    fun guardarCarro(carro: Carro)
+    suspend fun guardarCarro(carro: Carro)
 
-    fun eliminarVehiculo(vehiculo: Vehiculo)
+    suspend fun eliminarVehiculo(vehiculo: Vehiculo)
 }
