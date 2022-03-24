@@ -6,10 +6,6 @@ import com.example.dominio.vehiculo.repositorio.RepositorioCarro
 
 class ServicioCarro(var repositorioCarro: RepositorioCarro) : ServicioVehiculo() {
 
-    companion object {
-        const val CAPACIDAD_TOTAL_Carros = 20
-    }
-
     override suspend fun guardar(vehiculo: Vehiculo): Boolean {
         val carroGuardado = if (repositorioCarro.carroExiste(vehiculo)) {
             false
