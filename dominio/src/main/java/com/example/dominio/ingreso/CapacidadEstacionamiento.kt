@@ -1,6 +1,11 @@
-package com.example.dominio.modelo
+package com.example.dominio.ingreso
 
-class Parqueadero : CobroServicio, Ingreso {// todo responsabilidad unica
+import com.example.dominio.cobro.CobroServicio
+import com.example.dominio.vehiculo.modelo.Carro
+import com.example.dominio.vehiculo.modelo.Moto
+import com.example.dominio.vehiculo.modelo.Vehiculo
+
+class CapacidadEstacionamiento : CobroServicio {// todo responsabilidad unica
 
     private var tarifaTotal = 0
     private var tarifaParqueoTotal = 0
@@ -25,21 +30,6 @@ class Parqueadero : CobroServicio, Ingreso {// todo responsabilidad unica
 
     }
 
-    override fun restriccionIngreso(vehiculo: Vehiculo, diaSemana: String): Boolean {
-
-        restringido = false
-
-        if (vehiculo.identificacionVehiculo.isEmpty()) { // todo tell don't ask
-            restringido = true
-
-        } else {
-            if (vehiculo.identificacionVehiculo.first() == LETRA_RESTRINGIDA) {
-                restringido = !diasPermitidos.contains(diaSemana)
-            }
-        }
-        return restringido
-    }
-
     override fun ingresoVehiculos(vehiculo: Vehiculo, diaSemana: String): Boolean {
 
         var vehiculoIngresado = false
@@ -53,12 +43,7 @@ class Parqueadero : CobroServicio, Ingreso {// todo responsabilidad unica
                 }
             }
             is Moto -> {
-                val cuantasMotos = listaVehiculoMoto.size
-                hayCupo = cuantasMotos <= LIMITE_MOTO
-                if (restriccionIngreso(vehiculo, diaSemana) && hayCupo) {
-                    listaVehiculoMoto.add(vehiculo)
-                    vehiculoIngresado = true
-                }
+
             }
             else -> {
                 vehiculoIngresado = false

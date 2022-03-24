@@ -1,5 +1,6 @@
-package com.example.dominio.modelo
+package com.example.dominio.cobro
 
+import com.example.dominio.vehiculo.modelo.Moto
 import org.junit.Test
 
 class MotoTest {
@@ -7,7 +8,7 @@ class MotoTest {
     @Test
     fun obtenerNumeroPlaca_NumeroPlacaCorrecto_NumeroPlacaNoVacio() {
         val motoTestNumeroPlaca = Moto("HSU531", true)
-        val numeroPlaca = motoTestNumeroPlaca.identificacionVehiculo
+        val numeroPlaca = motoTestNumeroPlaca.placaVehiculo
 
         assert(numeroPlaca.isNotEmpty())
     }
@@ -15,7 +16,7 @@ class MotoTest {
     @Test
     fun obtenerNumeroPlaca_NumeroPlacaVacio_NumeroPlacaVacio() {
         val motoTestNumeroPlaca = Moto("", true)
-        val numeroPlaca = motoTestNumeroPlaca.identificacionVehiculo
+        val numeroPlaca = motoTestNumeroPlaca.placaVehiculo
 
         assert(numeroPlaca.isEmpty())
     }

@@ -1,5 +1,9 @@
-package com.example.dominio.modelo
+package com.example.dominio.cobro
 
+import com.example.dominio.ingreso.CapacidadEstacionamiento
+import com.example.dominio.vehiculo.modelo.Carro
+import com.example.dominio.vehiculo.modelo.Moto
+import com.example.dominio.vehiculo.modelo.Vehiculo
 import org.junit.Test
 
 class ParqueaderoTest {
@@ -8,7 +12,7 @@ class ParqueaderoTest {
     fun ingresoVehiculos_PlacaNoVacia_IngresoPermitido() {
 
         //Arrange
-        val ingresoParqueadero = Parqueadero()
+        val ingresoParqueadero = CapacidadEstacionamiento()
         val carroJuan: Vehiculo = Carro("HSU531")
         //Act
         val restringido = ingresoParqueadero.ingresoVehiculos(carroJuan, "Domingo")
@@ -20,7 +24,7 @@ class ParqueaderoTest {
     fun ingresoVehiculos_PlacaVacia_IngresoNoPermitido() {
 
         //Arrange
-        val ingresoParqueadero = Parqueadero()
+        val ingresoParqueadero = CapacidadEstacionamiento()
         val carroJuan: Vehiculo = Carro("")
         //Act
         val restringido = ingresoParqueadero.ingresoVehiculos(carroJuan, "Domingo")
@@ -32,7 +36,7 @@ class ParqueaderoTest {
     fun ingresoVehiculos_PlacaMayuscula_IngresoPermitido() {
 
         //Arrange
-        val ingresoParqueadero = Parqueadero()
+        val ingresoParqueadero = CapacidadEstacionamiento()
         val carroJuan: Vehiculo = Carro("HSU531")
         //Act
         val restringido = ingresoParqueadero.ingresoVehiculos(carroJuan, "Domingo")
@@ -44,7 +48,7 @@ class ParqueaderoTest {
     fun ingresoVehiculos_PlacaMinuscula_IngresoPermitido() {
 
         //Arrange
-        val ingresoParqueadero = Parqueadero()
+        val ingresoParqueadero = CapacidadEstacionamiento()
         val carroJuan: Vehiculo = Carro("hsu531")
         //Act
         val restringido = ingresoParqueadero.ingresoVehiculos(carroJuan, "domingo")
@@ -56,7 +60,7 @@ class ParqueaderoTest {
     fun ingresoVehiculos_DiaPermitido_IngresoPermitido() {
 
         //Arrange
-        val ingresoParqueadero = Parqueadero()
+        val ingresoParqueadero = CapacidadEstacionamiento()
         val carroJuan: Vehiculo = Carro("Asu531")
         //Act
         val restringido = ingresoParqueadero.ingresoVehiculos(carroJuan, "Domingo")
@@ -68,7 +72,7 @@ class ParqueaderoTest {
     fun ingresoVehiculos_DiaPermitidouno_IngresoPermitido() {
 
         //Arrange
-        val ingresoParqueadero = Parqueadero()
+        val ingresoParqueadero = CapacidadEstacionamiento()
         val carroJuan: Vehiculo = Carro("Asu531")
         //Act
         val restringido = ingresoParqueadero.ingresoVehiculos(carroJuan, "Lunes")
@@ -80,7 +84,7 @@ class ParqueaderoTest {
     fun ingresoVehiculos_DiaNoPermitido_IngresoNoPermitido() {
 
         //Arrange
-        val ingresoParqueadero = Parqueadero()
+        val ingresoParqueadero = CapacidadEstacionamiento()
         val carroJuan: Vehiculo = Carro("Asu531")
         val dia = "Jueves"
         //Act
@@ -93,7 +97,7 @@ class ParqueaderoTest {
     fun cobroTarifaMoto_TiempoEnHorasAltoCilindraje_TarifaParqueo() {
 
         //Arrange
-        val parqueadero = Parqueadero()
+        val parqueadero = CapacidadEstacionamiento()
         val duracionServicioHoras = 8
         val moto = Moto("hsu531", true)
         //Act
@@ -106,7 +110,7 @@ class ParqueaderoTest {
     fun cobroTarifaMoto_TiempoEnHorasAltoCilindrajeFalse_TarifaParqueo() {
 
         //Arrange
-        val parqueadero = Parqueadero()
+        val parqueadero = CapacidadEstacionamiento()
         val duracionServicioHoras = 8
         val moto = Moto("hsu531", false)
         //Act
@@ -119,7 +123,7 @@ class ParqueaderoTest {
     fun cobroTarifaMoto_TiempoEnDiasAltoCilindrajeFalse_TarifaParqueo() {
 
         //Arrange
-        val parqueadero = Parqueadero()
+        val parqueadero = CapacidadEstacionamiento()
         val duracionServicioHoras = 16
         val moto = Moto("hsu531", false)
         //Act
@@ -132,7 +136,7 @@ class ParqueaderoTest {
     fun cobroTarifaMoto_TiempoEnDiasHorasAltoCilindrajeFalse_TarifaParqueo() {
 
         //Arrange
-        val parqueadero = Parqueadero()
+        val parqueadero = CapacidadEstacionamiento()
         val duracionServicioHoras = 50
         val moto = Moto("hsu531", false)
         //Act
@@ -145,7 +149,7 @@ class ParqueaderoTest {
     fun cobroTarifaCarro_TiempoUnDiaCarro_TarifaParqueo() {
 
         //Arrange
-        val parqueadero = Parqueadero()
+        val parqueadero = CapacidadEstacionamiento()
         val duracionServicioHoras = 14
         val carro = Carro("hsu531")
         //Act
@@ -158,7 +162,7 @@ class ParqueaderoTest {
     fun cobroTarifaCarro_TiempoEnHorasCarro_TarifaParqueo() {
 
         //Arrange
-        val parqueadero = Parqueadero()
+        val parqueadero = CapacidadEstacionamiento()
         val duracionServicioHoras = 6
         val carro = Carro("hsu531")
         //Act
@@ -171,7 +175,7 @@ class ParqueaderoTest {
     fun cobroTarifaCarro_TiempoEnDiasCarro_TarifaParqueo() {
 
         //Arrange
-        val parqueadero = Parqueadero()
+        val parqueadero = CapacidadEstacionamiento()
         val duracionServicioHoras = 245
         val carro = Carro("hsu531")
         //Act
@@ -185,7 +189,7 @@ class ParqueaderoTest {
     fun salidaVehiculos_SalidaCarroHoras_tarifaParqueo() {
 
         //Arrange
-        val parqueadero = Parqueadero()
+        val parqueadero = CapacidadEstacionamiento()
         val duracionServicioHoras = 6
         val carro = Carro("hsu531")
         parqueadero.listaVehiculoCarro.add(carro)
@@ -199,7 +203,7 @@ class ParqueaderoTest {
     fun salidaVehiculos_SalidaCarroDias_tarifaParqueo() {
 
         //Arrange
-        val parqueadero = Parqueadero()
+        val parqueadero = CapacidadEstacionamiento()
         val duracionServicioHoras = 60
         val carro = Carro("hsu531")
         parqueadero.listaVehiculoCarro.add(carro)
@@ -214,7 +218,7 @@ class ParqueaderoTest {
     fun salidaVehiculos_SalidaCarroUnDia_tarifaParqueo() {
 
         //Arrange
-        val parqueadero = Parqueadero()
+        val parqueadero = CapacidadEstacionamiento()
         val duracionServicioHoras = 9
         val carro = Carro("hsu531")
         parqueadero.listaVehiculoCarro.add(carro)
@@ -228,7 +232,7 @@ class ParqueaderoTest {
     fun salidaVehiculos_HorasValorNegativoCarro_tarifaParqueo() {
 
         //Arrange
-        val parqueadero = Parqueadero()
+        val parqueadero = CapacidadEstacionamiento()
         val duracionServicioHoras = -10
         val carro = Carro("hsu531")
         parqueadero.listaVehiculoCarro.add(carro)
@@ -242,7 +246,7 @@ class ParqueaderoTest {
     fun salidaVehiculos_HorasEgdeCaseCarro_tarifaParqueo() {
 
         //Arrange
-        val parqueadero = Parqueadero()
+        val parqueadero = CapacidadEstacionamiento()
         val duracionServicioHoras = 1200
         val carro = Carro("hsu531")
         parqueadero.listaVehiculoCarro.add(carro)
@@ -256,7 +260,7 @@ class ParqueaderoTest {
     fun salidaVehiculos_SalidaMotoDias_tarifaParqueo() {
 
         //Arrange
-        val parqueadero = Parqueadero()
+        val parqueadero = CapacidadEstacionamiento()
         val duracionServicioHoras = 242
         val moto = Moto("hsu531")
         parqueadero.listaVehiculoMoto.add(moto)
@@ -270,7 +274,7 @@ class ParqueaderoTest {
     fun salidaVehiculos_SalidaMotoDiasCilindrajeAlto_tarifaParqueo() {
 
         //Arrange
-        val parqueadero = Parqueadero()
+        val parqueadero = CapacidadEstacionamiento()
         val duracionServicioHoras = 58
         val moto = Moto("hsu531", true)
         parqueadero.listaVehiculoMoto.add(moto)
@@ -284,7 +288,7 @@ class ParqueaderoTest {
     fun salidaVehiculos_SalidaMotoUnDia_tarifaParqueo() {
 
         //Arrange
-        val parqueadero = Parqueadero()
+        val parqueadero = CapacidadEstacionamiento()
         val duracionServicioHoras = 9
         val moto = Moto("hsu531")
         parqueadero.listaVehiculoMoto.add(moto)
@@ -298,7 +302,7 @@ class ParqueaderoTest {
     fun salidaVehiculos_SalidaMotoUnDiaCilindrajeAlto_tarifaParqueo() {
 
         //Arrange
-        val parqueadero = Parqueadero()
+        val parqueadero = CapacidadEstacionamiento()
         val duracionServicioHoras = 9
         val moto = Moto("hsu531", true)
         parqueadero.listaVehiculoMoto.add(moto)
@@ -312,7 +316,7 @@ class ParqueaderoTest {
     fun salidaVehiculos_SalidaMotoUnHorasCilindrajeAlto_tarifaParqueo() {
 
         //Arrange
-        val parqueadero = Parqueadero()
+        val parqueadero = CapacidadEstacionamiento()
         val duracionServicioHoras = 6
         val moto = Moto("hsu531", true)
         parqueadero.listaVehiculoMoto.add(moto)
@@ -326,7 +330,7 @@ class ParqueaderoTest {
     fun salidaVehiculos_SalidaMotoUnDiaHoras_tarifaParqueo() {
 
         //Arrange
-        val parqueadero = Parqueadero()
+        val parqueadero = CapacidadEstacionamiento()
         val duracionServicioHoras = 6
         val moto = Moto("hsu531", false)
         parqueadero.listaVehiculoMoto.add(moto)
@@ -340,7 +344,7 @@ class ParqueaderoTest {
     fun salidaVehiculos_HorasValorNegativoMoto_tarifaParqueo() {
 
         //Arrange
-        val parqueadero = Parqueadero()
+        val parqueadero = CapacidadEstacionamiento()
         val duracionServicioHoras = -2
         val moto = Moto("hsu531", false)
         parqueadero.listaVehiculoMoto.add(moto)
@@ -354,7 +358,7 @@ class ParqueaderoTest {
     fun salidaVehiculos_HorasEdgeCaseMoto_tarifaParqueo() {
 
         //Arrange
-        val parqueadero = Parqueadero()
+        val parqueadero = CapacidadEstacionamiento()
         val duracionServicioHoras = 1200
         val moto = Moto("hsu531", false)
         parqueadero.listaVehiculoMoto.add(moto)

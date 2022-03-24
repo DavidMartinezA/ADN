@@ -1,4 +1,7 @@
-package com.example.dominio.modelo
+package com.example.dominio.cobro
+
+import com.example.dominio.vehiculo.modelo.Carro
+import com.example.dominio.vehiculo.modelo.Moto
 
 interface CobroServicio { // todo segregacion de interfaces
 

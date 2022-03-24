@@ -1,4 +1,4 @@
-package com.example.dominio.servicio
+package com.example.dominio.vehiculo.servicio
 
 
 import java.time.LocalDate

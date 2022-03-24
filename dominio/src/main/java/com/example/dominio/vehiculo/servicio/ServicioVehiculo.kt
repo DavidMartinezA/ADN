@@ -1,11 +1,11 @@
-package com.example.dominio.servicio
+package com.example.dominio.vehiculo.servicio
 
-import com.example.dominio.modelo.Carro
-import com.example.dominio.modelo.Moto
-import com.example.dominio.modelo.Vehiculo
-import com.example.dominio.repositorio.RepositorioVehiculo
+import com.example.dominio.vehiculo.modelo.Carro
+import com.example.dominio.vehiculo.modelo.Moto
+import com.example.dominio.vehiculo.modelo.Vehiculo
+import com.example.dominio.vehiculo.repositorio.RepositorioVehiculo
 
-class ServicioVehiculo(var repositorioVehiculo: RepositorioVehiculo) { // aplicar herencia
+abstract class ServicioVehiculo(var repositorioVehiculo: RepositorioVehiculo) { // aplicar herencia
 
 
     suspend fun guardarVehiculo(vehiculo: Vehiculo): Boolean {

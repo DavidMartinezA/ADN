@@ -1,8 +1,8 @@
-package com.example.dominio.repositorio
+package com.example.dominio.vehiculo.repositorio
 
-import com.example.dominio.modelo.Carro
-import com.example.dominio.modelo.Moto
-import com.example.dominio.modelo.Vehiculo
+import com.example.dominio.vehiculo.modelo.Carro
+import com.example.dominio.vehiculo.modelo.Moto
+import com.example.dominio.vehiculo.modelo.Vehiculo
 
 interface RepositorioVehiculo {
 
