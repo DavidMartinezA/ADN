@@ -35,19 +35,9 @@ class CapacidadEstacionamiento : CobroServicio {// todo responsabilidad unica
         var vehiculoIngresado = false
         when (vehiculo) {
             is Carro -> {
-                val cuantosCarros = listaVehiculoCarro.size
-                hayCupo = cuantosCarros <= LIMITE_CARRO
-                if (restriccionIngreso(vehiculo, diaSemana) && hayCupo) {
-                    listaVehiculoCarro.add(vehiculo)
-                    vehiculoIngresado = true
-                }
-            }
-            is Moto -> {
 
             }
-            else -> {
-                vehiculoIngresado = false
-            }
+
         }
 
         return vehiculoIngresado

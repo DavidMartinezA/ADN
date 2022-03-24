@@ -3,7 +3,7 @@ package com.example.insfrastructure.accesodatos.repositorio
 import com.example.dominio.vehiculo.modelo.Carro
 import com.example.dominio.vehiculo.modelo.Moto
 import com.example.dominio.vehiculo.modelo.Vehiculo
-import com.example.dominio.vehiculo.repositorio.RepositorioVehiculo
+import com.example.dominio.vehiculo.repositorio.RepositorioMoto
 import com.example.insfrastructure.accesodatos.anticorrupcion.CarroTranslator
 import com.example.insfrastructure.accesodatos.anticorrupcion.MotoTranslator
 import com.example.insfrastructure.accesodatos.basededatos.CarroDataBase
@@ -12,7 +12,7 @@ import com.example.insfrastructure.accesodatos.basededatos.MotoDataBase
 class RepositorioVehiculoRoom(
     val carroDataBase: CarroDataBase,
     val motoDataBase: MotoDataBase,
-) : RepositorioVehiculo {
+) : RepositorioMoto {
 
     override suspend fun vehiculoExiste(vehiculo: Vehiculo): Boolean {
 

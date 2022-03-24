@@ -1,13 +1,13 @@
 package com.example.dominio.ingreso
 
+import com.example.dominio.vehiculo.modelo.Moto
 import com.example.dominio.vehiculo.modelo.Vehiculo
-import com.example.dominio.vehiculo.servicio.ServicioVehiculo
+
 
 class IngresoMoto(
     override var placaVehiculo: String,
     var cilindrajeAlto: Boolean = false,
-    var listaMoto: ServicioVehiculo,
-) : IngresoVehiculo(placaVehiculo) {
+    var listaMoto: ArrayList<Moto>= ServicioMoto.) : IngresoVehiculo(placaVehiculo) {
 
     override fun ingresoVehiculos(diaSemana: String): Boolean {
         var vehiculoIngresado = false
