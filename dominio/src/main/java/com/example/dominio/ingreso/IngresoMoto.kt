@@ -1,7 +1,7 @@
 package com.example.dominio.ingreso
 
 
-import com.example.dominio.cobro.CobroTarifa
+import com.example.dominio.cobro.CobroTarifaMoto
 import com.example.dominio.vehiculo.modelo.Vehiculo
 import com.example.dominio.vehiculo.servicio.ServicioMoto
 import java.time.LocalDate
@@ -32,7 +32,7 @@ class IngresoMoto(override var vehiculo: Vehiculo, var servicioMoto: ServicioMot
 
     override suspend fun salidaVehiculos(): Int {
         horaSalida = LocalDate.now().dayOfWeek.value
-        val cobro = CobroTarifa(duracionServicioEstacionamiento(), vehiculo).cobroTarifaMoto()
+        val cobro = CobroTarifaMoto(duracionServicioEstacionamiento(), vehiculo).cobroTarifa()
         var tarifaTotal = 0
         if (servicioMoto.consultarLista().contains(vehiculo)) {
             tarifaTotal = cobro

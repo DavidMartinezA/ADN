@@ -3,9 +3,9 @@ package com.example.insfrastructure.accesodatos.anticorrupcion
 import com.example.dominio.vehiculo.modelo.Carro
 import com.example.insfrastructure.accesodatos.entidadesbasedatos.EntidadDatosCarro
 
-class CarroTranslator {
+class TraductorCarro {
 
-    fun fromDomainToDto(carro: Carro): EntidadDatosCarro {
+    fun DominioADtoCarro(carro: Carro): EntidadDatosCarro {
         return EntidadDatosCarro(carro.placaVehiculo)
     }
 

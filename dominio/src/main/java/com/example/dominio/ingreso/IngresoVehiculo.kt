@@ -18,7 +18,7 @@ abstract class IngresoVehiculo(open var vehiculo: Vehiculo) {
         return 0
     }
 
-    fun restriccionIngreso(vehiculo: Vehiculo): Boolean {
+    fun restriccionIngreso(): Boolean {
         val diaSemana: String = LocalDateTime.now().dayOfWeek.toString()
         var restringido = false
         if (vehiculo.placaVehiculo.first() == LETRA_RESTRINGIDA) {
