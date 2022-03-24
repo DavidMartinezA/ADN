@@ -1,9 +1,11 @@
 package com.example.dominio.ingreso
 
+import com.example.dominio.cobro.CobroTarifa
 import com.example.dominio.vehiculo.modelo.Vehiculo
 import com.example.dominio.vehiculo.servicio.ServicioCarro
+import java.time.LocalDate
 
-class IngresoCarro(var vehiculo: Vehiculo, var servicioCarro: ServicioCarro) :
+class IngresoCarro(override var vehiculo: Vehiculo, var servicioCarro: ServicioCarro) :
     IngresoVehiculo(vehiculo) {
 
     companion object {
@@ -15,27 +17,28 @@ class IngresoCarro(var vehiculo: Vehiculo, var servicioCarro: ServicioCarro) :
         return listaCarros.size <= CAPACIDAD_TOTAL_CARROS
     }
 
-    override suspend fun ingresoVehiculos(diaSemana: String): Boolean {
+    override suspend fun ingresoVehiculos(): Boolean {
+        horaIngreso = LocalDate.now().dayOfWeek.value
         var vehiculoIngresado = false
         val capacidad = consutarCapacidad()
-        if (capacidad) {
+        if (capacidad && !restriccionIngreso(vehiculo)) {
             servicioCarro.guardar(vehiculo)
             vehiculoIngresado = true
-
         }
         return vehiculoIngresado
     }
 
-    override suspend fun salidaVehiculos(vehiculo: Vehiculo, duracionServicio: Int): Int {
+    override suspend fun salidaVehiculos(): Int {
+        horaSalida = LocalDate.now().dayOfWeek.value
+        val cobro = CobroTarifa(duracionServicioEstacionamiento(), vehiculo).cobroTarifaMoto()
         var tarifaTotal = 0
-        if (servicioMoto.consultarLista().contains(vehiculo)) {
-            tarifaTotal = cobroTarifaMoto(duracionServicio, vehiculo)
-            servicioMoto.eliminar(vehiculo)
+        if (servicioCarro.consultarLista().contains(vehiculo)) {
+            tarifaTotal = cobro
         }
         return tarifaTotal
     }
 
-    override suspend fun duracionServicioEstacionamiento(): Int {
+    override fun duracionServicioEstacionamiento(): Int {
         return 0
     }
 }

@@ -6,11 +6,8 @@ import com.example.dominio.vehiculo.modelo.Vehiculo
 import com.example.dominio.vehiculo.servicio.ServicioMoto
 import java.time.LocalDate
 
-class IngresoMoto(var vehiculo: Vehiculo, var servicioMoto: ServicioMoto) :
+class IngresoMoto(override var vehiculo: Vehiculo, var servicioMoto: ServicioMoto) :
     IngresoVehiculo(vehiculo) {
-
-    private var horaIngreso: Int = 0
-    private var horaSalida: Int = 0
 
     companion object {
         const val CAPACIDAD_TOTAL_MOTOS = 10
@@ -22,9 +19,9 @@ class IngresoMoto(var vehiculo: Vehiculo, var servicioMoto: ServicioMoto) :
     }
 
     override suspend fun ingresoVehiculos(): Boolean {
+        horaIngreso = LocalDate.now().dayOfWeek.value
         var vehiculoIngresado = false
         val capacidad = consutarCapacidad()
-        horaIngreso = LocalDate.now().dayOfWeek.value
         if (capacidad) {
             servicioMoto.guardar(vehiculo)
             vehiculoIngresado = true
@@ -33,11 +30,12 @@ class IngresoMoto(var vehiculo: Vehiculo, var servicioMoto: ServicioMoto) :
         return vehiculoIngresado
     }
 
-    override suspend fun salidaVehiculos(vehiculo: Vehiculo): Int {
+    override suspend fun salidaVehiculos(): Int {
         horaSalida = LocalDate.now().dayOfWeek.value
+        val cobro = CobroTarifa(duracionServicioEstacionamiento(), vehiculo).cobroTarifaMoto()
         var tarifaTotal = 0
         if (servicioMoto.consultarLista().contains(vehiculo)) {
-            tarifaTotal = CobroTarifa.servicioMoto.eliminar(vehiculo)
+            tarifaTotal = cobro
         }
         return tarifaTotal
     }

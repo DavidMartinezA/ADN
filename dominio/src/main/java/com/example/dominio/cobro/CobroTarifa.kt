@@ -1,10 +1,9 @@
 package com.example.dominio.cobro
 
-import com.example.dominio.vehiculo.modelo.Carro
 import com.example.dominio.vehiculo.modelo.Moto
 import com.example.dominio.vehiculo.modelo.Vehiculo
 
-class CobroTarifa(var duracionServicioEstacionamiento: Int, vehiculo: Vehiculo) :
+class CobroTarifa(var duracionServicioEstacionamiento: Int, var vehiculo: Vehiculo) :
     CobroServicioCarro, CobroServicioMoto {
 
     private var tarifaTotal = 0
@@ -22,7 +21,8 @@ class CobroTarifa(var duracionServicioEstacionamiento: Int, vehiculo: Vehiculo) 
     }
 
 
-    override fun cobroTarifaMoto(duracionServicioEstacionamiento: Int, moto: Moto): Int {
+    override fun cobroTarifaMoto(): Int {
+
 
         if (duracionServicioEstacionamiento > 0) {
             when (duracionServicioEstacionamiento) {
@@ -68,7 +68,7 @@ class CobroTarifa(var duracionServicioEstacionamiento: Int, vehiculo: Vehiculo) 
                     tarifaParqueoTotal = 0
                 }
             }
-            if (moto.cilindrajeAlto) {
+            if ((vehiculo as Moto).cilindrajeAlto) {
                 tarifaParqueoTotal += COBRO_ALTO_CILINDRAJE
             }
 
@@ -79,21 +79,22 @@ class CobroTarifa(var duracionServicioEstacionamiento: Int, vehiculo: Vehiculo) 
         return tarifaParqueoTotal
     }
 
-    override fun cobroTarifaCarro(duracionServicio: Int, carro: Carro): Int {
+    override fun cobroTarifaCarro(): Int {
 
-        if (duracionServicio > 0) {
-            when (duracionServicio) {
+        if (duracionServicioEstacionamiento > 0) {
+            when (duracionServicioEstacionamiento) {
                 in 0..8 -> {
-                    tarifaParqueoTotal = duracionServicio * VALOR_HORA_CARRO
+                    tarifaParqueoTotal = duracionServicioEstacionamiento * VALOR_HORA_CARRO
                 }
                 in 9..24 -> {
                     tarifaParqueoTotal = VALOR_DIA_CARRO
                 }
                 in 25..216 -> {
-                    val calculoCobro = (duracionServicio / HORAS_EN_EL_DIA).toString()
+                    val calculoCobro =
+                        (duracionServicioEstacionamiento / HORAS_EN_EL_DIA).toString()
                     var diasCobro = calculoCobro[0].toString().toInt()
                     val diasEnHoras = diasCobro * HORAS_EN_EL_DIA
-                    var horasCobro = duracionServicio - diasEnHoras
+                    var horasCobro = duracionServicioEstacionamiento - diasEnHoras
 
                     if (horasCobro >= 9) {
                         horasCobro = VALOR_DIA_CARRO
@@ -104,12 +105,13 @@ class CobroTarifa(var duracionServicioEstacionamiento: Int, vehiculo: Vehiculo) 
                     tarifaParqueoTotal = diasCobro + horasCobro
                 }
                 in 217..999 -> {
-                    val calculoCobro = (duracionServicio / HORAS_EN_EL_DIA).toString()
+                    val calculoCobro =
+                        (duracionServicioEstacionamiento / HORAS_EN_EL_DIA).toString()
                     val diasCobroDecena = calculoCobro[0].toString()
                     val diasCobroUnidad = calculoCobro[1].toString()
                     var diasCobro = (diasCobroDecena + diasCobroUnidad).toInt()
                     val diasEnHoras = diasCobro * HORAS_EN_EL_DIA
-                    var horasCobro = duracionServicio - diasEnHoras
+                    var horasCobro = duracionServicioEstacionamiento - diasEnHoras
 
                     if (horasCobro >= 9) {
                         horasCobro = VALOR_DIA_CARRO

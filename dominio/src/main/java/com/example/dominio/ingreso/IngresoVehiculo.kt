@@ -1,14 +1,19 @@
 package com.example.dominio.ingreso
 
 import com.example.dominio.vehiculo.modelo.Vehiculo
+import java.time.LocalDateTime
 
-abstract class IngresoVehiculo(Vehiculo: Vehiculo) {
+abstract class IngresoVehiculo(open var vehiculo: Vehiculo) {
+    protected var horaIngreso: Int = 0
+    protected var horaSalida: Int = 0
+
     companion object {
         val DIAS_PERMITIDOS = arrayListOf("Domingo", "Lunes")
         const val LETRA_RESTRINGIDA = 'A'
     }
 
-    fun restriccionIngreso(vehiculo: Vehiculo, diaSemana: String): Boolean {
+    fun restriccionIngreso(vehiculo: Vehiculo): Boolean {
+        val diaSemana: String = LocalDateTime.now().dayOfWeek.toString()
         var restringido = false
         if (vehiculo.placaVehiculo.first() == LETRA_RESTRINGIDA) {
             restringido = !DIAS_PERMITIDOS.contains(diaSemana)
