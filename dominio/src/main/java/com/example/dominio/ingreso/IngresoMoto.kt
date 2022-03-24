@@ -25,8 +25,13 @@ class IngresoMoto(var vehiculo: Vehiculo, var servicioMoto: ServicioMoto) :
         return vehiculoIngresado
     }
 
-    override fun salidaVehiculos(vehiculo: Vehiculo, duracionServicio: Int): Int {
-        TODO("Not yet implemented")
+    override suspend fun salidaVehiculos(vehiculo: Vehiculo, duracionServicio: Int): Int {
+        var tarifaTotal = 0
+        if (servicioMoto.consultarLista().contains(vehiculo)) {
+            tarifaTotal = cobroTarifaMoto(duracionServicio, vehiculo)
+            servicioMoto.eliminar(vehiculo)
+        }
+        return tarifaTotal
     }
 
 }

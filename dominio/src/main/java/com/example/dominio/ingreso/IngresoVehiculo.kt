@@ -17,7 +17,7 @@ abstract class IngresoVehiculo(Vehiculo: Vehiculo) {
 
     abstract suspend fun ingresoVehiculos(diaSemana: String): Boolean
 
-    abstract fun salidaVehiculos(vehiculo: Vehiculo, duracionServicio: Int): Int
+    abstract suspend fun salidaVehiculos(vehiculo: Vehiculo, duracionServicio: Int): Int
 
     abstract suspend fun consutarCapacidad(): Boolean
 

@@ -34,10 +34,7 @@ class CapacidadEstacionamiento : CobroServicio {// todo responsabilidad unica
     override fun salidaVehiculos(vehiculo: Vehiculo, duracionServicio: Int): Int {
         when (vehiculo) {
             is Moto -> {
-                if (listaVehiculoMoto.contains(vehiculo)) {
-                    tarifaTotal = cobroTarifaMoto(duracionServicio, vehiculo)
-                    listaVehiculoMoto.remove(vehiculo)
-                }
+
             }
             is Carro -> {
                 if (listaVehiculoCarro.contains(vehiculo)) {

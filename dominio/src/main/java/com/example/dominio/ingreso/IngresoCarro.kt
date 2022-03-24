@@ -9,7 +9,7 @@ class IngresoCarro(placaVehiculo: String, var diaSemana: String) : IngresoVehicu
         TODO("Not yet implemented")
     }
 
-    override fun salidaVehiculos(vehiculo: Vehiculo, duracionServicio: Int): Int {
+    override suspend fun salidaVehiculos(vehiculo: Vehiculo, duracionServicio: Int): Int {
         TODO("Not yet implemented")
     }
 }

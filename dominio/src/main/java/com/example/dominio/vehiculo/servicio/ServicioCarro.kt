@@ -7,7 +7,7 @@ import com.example.dominio.vehiculo.repositorio.RepositorioCarro
 class ServicioCarro(var repositorioCarro: RepositorioCarro) : ServicioVehiculo() {
 
     companion object {
-        const val CAPACIDAD_TOTAL_CARROS = 20
+        const val CAPACIDAD_TOTAL_Carros = 20
     }
 
     override suspend fun guardar(vehiculo: Vehiculo): Boolean {
@@ -22,21 +22,18 @@ class ServicioCarro(var repositorioCarro: RepositorioCarro) : ServicioVehiculo()
     }
 
     override suspend fun eliminar(vehiculo: Vehiculo): Boolean {
-        val carroGuardado = if (repositorioCarro.carroExiste(vehiculo)) {
+        val carroEliminado = if (repositorioCarro.carroExiste(vehiculo)) {
             false
             // todo ARROJAR UNA EXEPCION
         } else {
             repositorioCarro.eliminarCarro(vehiculo as Carro)
             true
         }
-        return carroGuardado
+        return carroEliminado
     }
 
     override suspend fun consultarLista(): ArrayList<Vehiculo> {
-        val listaCarros: ArrayList<Vehiculo> = repositorioCarro.listaCarros()
-        val hayEspacioEnEstacionamiento = listaCarros.size <= ServicioCarro.CAPACIDAD_TOTAL_CARROS
-        return hayEspacioEnEstacionamiento
+        return repositorioCarro.listaCarros()
     }
-
 
 }
