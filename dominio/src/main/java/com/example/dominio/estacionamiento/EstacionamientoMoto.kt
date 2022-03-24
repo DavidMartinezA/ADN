@@ -1,17 +1,22 @@
-package com.example.dominio.ingreso
-
+package com.example.dominio.estacionamiento
 
 import com.example.dominio.cobro.CobroTarifaMoto
 import com.example.dominio.vehiculo.modelo.Vehiculo
 import com.example.dominio.vehiculo.servicio.ServicioMoto
 import java.time.LocalDate
+import java.time.LocalDateTime
+import java.time.LocalTime
+import java.time.temporal.Temporal
 
-class IngresoMoto(override var vehiculo: Vehiculo, var servicioMoto: ServicioMoto) :
-    IngresoVehiculo(vehiculo) {
+class EstacionamientoMoto(override var vehiculo: Vehiculo, var servicioMoto: ServicioMoto) :
+    EstacionamientoVehiculo(vehiculo) {
 
     companion object {
         const val CAPACIDAD_TOTAL_MOTOS = 10
     }
+
+    private lateinit var horaIngreso: Temporal
+    private lateinit var horaSalida: Temporal
 
     override suspend fun consutarCapacidad(): Boolean {
         val listaMotos: ArrayList<Vehiculo> = servicioMoto.consultarLista()
@@ -19,20 +24,20 @@ class IngresoMoto(override var vehiculo: Vehiculo, var servicioMoto: ServicioMot
     }
 
     override suspend fun ingresoVehiculos(): Boolean {
-        horaIngreso = LocalDate.now().dayOfWeek.value
+        horaIngreso = LocalDateTime.of(LocalDate.now(), LocalTime.now())
         var vehiculoIngresado = false
         val capacidad = consutarCapacidad()
         if (capacidad) {
             servicioMoto.guardar(vehiculo)
             vehiculoIngresado = true
-
         }
         return vehiculoIngresado
     }
 
     override suspend fun salidaVehiculos(): Int {
-        horaSalida = LocalDate.now().dayOfWeek.value
-        val cobro = CobroTarifaMoto(duracionServicioEstacionamiento(), vehiculo).cobroTarifa()
+        horaSalida = LocalDateTime.of(LocalDate.now(), LocalTime.now())
+        val cobro = CobroTarifaMoto(duracionServicioEstacionamiento(horaIngreso, horaSalida),
+            vehiculo).cobroTarifa()
         var tarifaTotal = 0
         if (servicioMoto.consultarLista().contains(vehiculo)) {
             tarifaTotal = cobro

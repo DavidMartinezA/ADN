@@ -1,21 +1,19 @@
-package com.example.dominio.ingreso
+package com.example.dominio.estacionamiento
 
 import com.example.dominio.vehiculo.modelo.Vehiculo
+import java.time.Duration
 import java.time.LocalDateTime
+import java.time.temporal.Temporal
 
-abstract class IngresoVehiculo(open var vehiculo: Vehiculo) {
-    protected var horaIngreso: Int = 0
-    protected var horaSalida: Int = 0
+abstract class EstacionamientoVehiculo(open var vehiculo: Vehiculo) {
 
     companion object {
         val DIAS_PERMITIDOS = arrayListOf("Domingo", "Lunes")
         const val LETRA_RESTRINGIDA = 'A'
     }
 
-    fun duracionServicioEstacionamiento(): Int {
-        horaIngreso //todo  hacer calculo de duracion
-        horaSalida
-        return 0
+    fun duracionServicioEstacionamiento(horaIngreso: Temporal, horaSalida: Temporal): Int {
+        return Duration.between(horaIngreso, horaSalida).toString().toInt()
     }
 
     fun restriccionIngreso(): Boolean {
