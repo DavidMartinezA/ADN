@@ -8,15 +8,11 @@ abstract class IngresoVehiculo(open var placaVehiculo: String) {
     }
 
     fun restriccionIngreso(vehiculo: Vehiculo, diaSemana: String): Boolean {
-
         var restringido = false
-
         if (vehiculo.placaVehiculo.first() == CapacidadEstacionamiento.LETRA_RESTRINGIDA) {
             restringido = !DIAS_PERMITIDOS.contains(diaSemana)
         }
-
         return restringido
-
     }
 
     abstract fun ingresoVehiculos(diaSemana: String): Boolean

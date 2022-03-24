@@ -5,7 +5,7 @@ import com.example.dominio.vehiculo.modelo.Vehiculo
 
 
 class IngresoMoto(
-    override var placaVehiculo: String,
+    var placaVehiculo: String,
     var cilindrajeAlto: Boolean = false,
     var listaMoto: ArrayList<Moto>= ServicioMoto.) : IngresoVehiculo(placaVehiculo) {
 
