@@ -8,6 +8,7 @@ abstract class ServicioVehiculo() {
 
     abstract suspend fun eliminar(vehiculo: Vehiculo): Boolean
 
-    abstract suspend fun consutarCapacidad(): Boolean
+    abstract suspend fun consultarLista(): ArrayList<Vehiculo>
+
 
 }

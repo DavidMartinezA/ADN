@@ -30,18 +30,6 @@ class CapacidadEstacionamiento : CobroServicio {// todo responsabilidad unica
 
     }
 
-    override fun ingresoVehiculos(vehiculo: Vehiculo, diaSemana: String): Boolean {
-
-        var vehiculoIngresado = false
-        when (vehiculo) {
-            is Carro -> {
-
-            }
-
-        }
-
-        return vehiculoIngresado
-    }
 
     override fun salidaVehiculos(vehiculo: Vehiculo, duracionServicio: Int): Int {
         when (vehiculo) {

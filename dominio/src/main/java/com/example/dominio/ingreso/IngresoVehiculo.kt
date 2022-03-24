@@ -2,7 +2,7 @@ package com.example.dominio.ingreso
 
 import com.example.dominio.vehiculo.modelo.Vehiculo
 
-abstract class IngresoVehiculo(open var placaVehiculo: String) {
+abstract class IngresoVehiculo(Vehiculo: Vehiculo) {
     companion object {
         val DIAS_PERMITIDOS = arrayListOf("Domingo", "Lunes")
     }
@@ -15,7 +15,11 @@ abstract class IngresoVehiculo(open var placaVehiculo: String) {
         return restringido
     }
 
-    abstract fun ingresoVehiculos(diaSemana: String): Boolean
+    abstract suspend fun ingresoVehiculos(diaSemana: String): Boolean
 
     abstract fun salidaVehiculos(vehiculo: Vehiculo, duracionServicio: Int): Int
+
+    abstract suspend fun consutarCapacidad(): Boolean
+
+
 }

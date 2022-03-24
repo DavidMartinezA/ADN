@@ -1,27 +1,32 @@
 package com.example.dominio.ingreso
 
-import com.example.dominio.vehiculo.modelo.Moto
 import com.example.dominio.vehiculo.modelo.Vehiculo
+import com.example.dominio.vehiculo.servicio.ServicioMoto
 
+class IngresoMoto(var vehiculo: Vehiculo, var servicioMoto: ServicioMoto) :
+    IngresoVehiculo(vehiculo) {
 
-class IngresoMoto(
-    var placaVehiculo: String,
-    var cilindrajeAlto: Boolean = false,
-    var listaMoto: ArrayList<Moto>= ServicioMoto.) : IngresoVehiculo(placaVehiculo) {
+    companion object {
+        const val CAPACIDAD_TOTAL_MOTOS = 10
+    }
 
-    override fun ingresoVehiculos(diaSemana: String): Boolean {
+    override suspend fun consutarCapacidad(): Boolean {
+        val listaCarros: ArrayList<Vehiculo> = servicioMoto.consultarLista()
+        return listaCarros.size <= ServicioMoto.CAPACIDAD_TOTAL_MOTOS
+    }
+
+    override suspend fun ingresoVehiculos(diaSemana: String): Boolean {
         var vehiculoIngresado = false
-
-        val cuantasMotos = listaMoto.size
-        hayCupo = cuantasMotos <= CapacidadEstacionamiento.LIMITE_MOTO
-        if (restriccionIngreso(vehiculo, diaSemana) && hayCupo) {
-            listaMoto.add(vehiculo)
+        val capacidad = servicioMoto.consutarCapacidad()
+        if (capacidad) {
+            servicioMoto.guardar(vehiculo)
             vehiculoIngresado = true
         }
-
+        return vehiculoIngresado
     }
 
     override fun salidaVehiculos(vehiculo: Vehiculo, duracionServicio: Int): Int {
         TODO("Not yet implemented")
     }
+
 }

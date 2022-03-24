@@ -2,9 +2,10 @@ package com.example.dominio.ingreso
 
 import com.example.dominio.vehiculo.modelo.Vehiculo
 
-class IngresoCarro(placaVehiculo: String) : IngresoVehiculo(placaVehiculo) {
+class IngresoCarro(placaVehiculo: String, var diaSemana: String) : IngresoVehiculo(placaVehiculo) {
 
-    override fun ingresoVehiculos(vehiculo: Vehiculo, diaSemana: String): Boolean {
+
+    override suspend fun ingresoVehiculos(diaSemana: String): Boolean {
         TODO("Not yet implemented")
     }
 

@@ -32,9 +32,11 @@ class ServicioCarro(var repositorioCarro: RepositorioCarro) : ServicioVehiculo()
         return carroGuardado
     }
 
-    override suspend fun consutarCapacidad(): Boolean {
+    override suspend fun consultarLista(): ArrayList<Vehiculo> {
         val listaCarros: ArrayList<Vehiculo> = repositorioCarro.listaCarros()
-        val hayEspacioEnEstacionamiento = listaCarros.size <= CAPACIDAD_TOTAL_CARROS
+        val hayEspacioEnEstacionamiento = listaCarros.size <= ServicioCarro.CAPACIDAD_TOTAL_CARROS
         return hayEspacioEnEstacionamiento
     }
+
+
 }
