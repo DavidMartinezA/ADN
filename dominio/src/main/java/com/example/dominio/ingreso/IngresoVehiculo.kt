@@ -12,6 +12,12 @@ abstract class IngresoVehiculo(open var vehiculo: Vehiculo) {
         const val LETRA_RESTRINGIDA = 'A'
     }
 
+    fun duracionServicioEstacionamiento(): Int {
+        horaIngreso //todo  hacer calculo de duracion
+        horaSalida
+        return 0
+    }
+
     fun restriccionIngreso(vehiculo: Vehiculo): Boolean {
         val diaSemana: String = LocalDateTime.now().dayOfWeek.toString()
         var restringido = false
@@ -26,8 +32,5 @@ abstract class IngresoVehiculo(open var vehiculo: Vehiculo) {
     abstract suspend fun salidaVehiculos(): Int
 
     abstract suspend fun consutarCapacidad(): Boolean
-
-    abstract fun duracionServicioEstacionamiento(): Int
-
 
 }

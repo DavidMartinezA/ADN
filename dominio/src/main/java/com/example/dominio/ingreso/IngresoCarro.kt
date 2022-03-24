@@ -38,7 +38,4 @@ class IngresoCarro(override var vehiculo: Vehiculo, var servicioCarro: ServicioC
         return tarifaTotal
     }
 
-    override fun duracionServicioEstacionamiento(): Int {
-        return 0
-    }
 }
