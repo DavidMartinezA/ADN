@@ -15,7 +15,7 @@ abstract class EstacionamientoVehiculo(var vehiculo: Vehiculo) {
 
     private lateinit var horaIngreso: Temporal
 
-    fun restriccionIngreso(): Boolean {
+    protected fun restriccionIngreso(): Boolean {
         val diaSemana = LocalDateTime.now().dayOfWeek.value
         var restringido = false
         if (vehiculo.placaVehiculo.uppercase().first() == LETRA_RESTRINGIDA) {
