@@ -31,5 +31,4 @@ class ServicioCarro(var repositorioCarro: RepositorioCarro) : ServicioVehiculo()
     override suspend fun consultarLista(): ArrayList<Vehiculo> {
         return repositorioCarro.listaCarros()
     }
-
 }

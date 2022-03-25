@@ -15,8 +15,8 @@ class EstacionamientoCarro(override var vehiculo: Vehiculo, var servicioCarro: S
         const val CAPACIDAD_TOTAL_CARROS = 20
     }
 
-    private lateinit var horaIngreso: Temporal
-    private lateinit var horaSalida: Temporal
+    override lateinit var horaIngreso: Temporal
+    override lateinit var horaSalida: Temporal
 
     override suspend fun consutarCapacidad(): Boolean {
         val listaCarros: ArrayList<Vehiculo> = servicioCarro.consultarLista()
@@ -44,5 +44,4 @@ class EstacionamientoCarro(override var vehiculo: Vehiculo, var servicioCarro: S
         }
         return tarifaTotal
     }
-
 }

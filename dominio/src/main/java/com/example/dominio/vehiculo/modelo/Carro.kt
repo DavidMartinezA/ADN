@@ -1,6 +1,12 @@
 package com.example.dominio.vehiculo.modelo
 
-class Carro(override val placaVehiculo: String) : Vehiculo(placaVehiculo) {
-    //[a-zA-Z]{3}-?[0-9]{2}[a-zA-Z0-9]?
+class Carro(override var placaVehiculo: String) : Vehiculo(placaVehiculo) {
 
+    init {
+        if (placaVehiculo.isEmpty() || !placaVehiculo.matches(Regex(FORMATO_PLACA))) {
+            throw throw Exception(MENSAJE_EXEPCION_NO_AUTORIZADO)
+        }
+    }
 }
+
+

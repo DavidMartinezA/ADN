@@ -8,22 +8,23 @@ class CobroTarifaMoto(
     override var vehiculo: Vehiculo,
 ) : CobroTarifa(duracionServicioEstacionamiento, vehiculo) {
 
-    companion object {
-        const val VALOR_HORA_MOTO = 500
-        const val VALOR_DIA_MOTO = 4000
-        const val COBRO_ALTO_CILINDRAJE = 2000
-    }
-
-    val calculoCobro = (duracionServicioEstacionamiento / HORAS_EN_EL_DIA).toString()
+    override var valorHora = 500
+    override var valorDia = 4000
+    override var tarifaParqueoTotal = 0
+    private var diasCobro = 0
+    private var diasEnHoras = 0
+    private var horasCobro = 0
+    private val cobroAdicionalAltoCilindraje = 2000
+    private val calculoCobro = (duracionServicioEstacionamiento / HORAS_EN_EL_DIA).toString()
 
     override fun cobroTarifa(): Int {
         if (duracionServicioEstacionamiento > 0) {
             when (duracionServicioEstacionamiento) {
                 in 0..8 -> {
-                    tarifaParqueoTotal = duracionServicioEstacionamiento * VALOR_HORA_MOTO
+                    tarifaParqueoTotal = duracionServicioEstacionamiento * valorHora
                 }
                 in 9..24 -> {
-                    tarifaParqueoTotal = VALOR_DIA_MOTO
+                    tarifaParqueoTotal = valorDia
                 }
                 in 25..216 -> {
                     diasCobro = calculoCobro[0].toString().toInt()
@@ -31,11 +32,11 @@ class CobroTarifaMoto(
                     horasCobro = duracionServicioEstacionamiento - diasEnHoras
 
                     if (horasCobro >= 9) {
-                        horasCobro = VALOR_DIA_MOTO
+                        horasCobro = valorDia
                     } else {
-                        horasCobro *= VALOR_HORA_MOTO
+                        horasCobro *= valorHora
                     }
-                    diasCobro *= VALOR_DIA_MOTO
+                    diasCobro *= valorDia
                     tarifaParqueoTotal = diasCobro + horasCobro
                 }
                 in 217..999 -> {
@@ -46,11 +47,11 @@ class CobroTarifaMoto(
                     horasCobro = duracionServicioEstacionamiento - diasEnHoras
 
                     if (horasCobro >= 9) {
-                        horasCobro = VALOR_DIA_MOTO
+                        horasCobro = valorDia
                     } else {
-                        horasCobro *= VALOR_HORA_MOTO
+                        horasCobro *= valorHora
                     }
-                    diasCobro *= VALOR_DIA_MOTO
+                    diasCobro *= valorDia
                     tarifaParqueoTotal = diasCobro + horasCobro
                 }
                 else -> { //Edge Case
@@ -58,16 +59,12 @@ class CobroTarifaMoto(
                 }
             }
             return tarifaParqueoTotal
-
         }
         if ((vehiculo as Moto).cilindrajeAlto) {
-            tarifaParqueoTotal += COBRO_ALTO_CILINDRAJE
+            tarifaParqueoTotal += cobroAdicionalAltoCilindraje
         } else {
             tarifaParqueoTotal = 0
         }
         return tarifaParqueoTotal
     }
 }
-
-
-

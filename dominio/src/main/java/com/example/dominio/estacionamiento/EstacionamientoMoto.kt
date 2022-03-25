@@ -15,8 +15,8 @@ class EstacionamientoMoto(override var vehiculo: Vehiculo, var servicioMoto: Ser
         const val CAPACIDAD_TOTAL_MOTOS = 10
     }
 
-    private lateinit var horaIngreso: Temporal
-    private lateinit var horaSalida: Temporal
+    override lateinit var horaIngreso: Temporal
+    override lateinit var horaSalida: Temporal
 
     override suspend fun consutarCapacidad(): Boolean {
         val listaMotos: ArrayList<Vehiculo> = servicioMoto.consultarLista()
@@ -44,5 +44,5 @@ class EstacionamientoMoto(override var vehiculo: Vehiculo, var servicioMoto: Ser
         }
         return tarifaTotal
     }
-
 }
+
