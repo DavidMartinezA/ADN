@@ -9,7 +9,7 @@ class CobroTarifaCarroTest {
     fun cobroTarifaCarro_TiempoUnDiaCarro_TarifaParqueo() {
 
         //Arrange
-        val carro: Carro = Carro("hsu531")
+        val carro = Carro("hsu531")
         val duracionServicioEstacionamiento = 9
         //Act
         val cobro = CobroTarifaCarro().cobroTarifa(duracionServicioEstacionamiento, carro)
@@ -21,7 +21,7 @@ class CobroTarifaCarroTest {
     fun cobroTarifaCarro_TiempoEnHorasCarro_TarifaParqueo() {
 
         //Arrange
-        val carro: Carro = Carro("hsu531")
+        val carro = Carro("hsu531")
         val duracionServicioEstacionamiento = 6
         //Act
         val cobro = CobroTarifaCarro().cobroTarifa(duracionServicioEstacionamiento, carro)
@@ -33,7 +33,7 @@ class CobroTarifaCarroTest {
     fun cobroTarifaCarro_TiempoEnDiasCarro_TarifaParqueo() {
 
         //Arrange
-        val carro: Carro = Carro("hsu531")
+        val carro = Carro("hsu531")
         val duracionServicioEstacionamiento = 50
         //Act
         val cobro = CobroTarifaCarro().cobroTarifa(duracionServicioEstacionamiento, carro)
@@ -45,7 +45,7 @@ class CobroTarifaCarroTest {
     fun cobroTarifaCarro_TiempoNegativo_TarifaParqueo() {
 
         //Arrange
-        val carro: Carro = Carro("hsu531")
+        val carro = Carro("hsu531")
         val duracionServicioEstacionamiento = -50
         //Act
         val cobro = CobroTarifaCarro().cobroTarifa(duracionServicioEstacionamiento, carro)
@@ -57,7 +57,7 @@ class CobroTarifaCarroTest {
     fun cobroTarifaCarro_TiempoExtremo_TarifaParqueo() {
 
         //Arrange
-        val carro: Carro = Carro("hsu531")
+        val carro = Carro("hsu531")
         val duracionServicioEstacionamiento = 999
         //Act
         val cobro = CobroTarifaCarro().cobroTarifa(duracionServicioEstacionamiento, carro)
@@ -69,7 +69,7 @@ class CobroTarifaCarroTest {
     fun cobroTarifaCarro_TiempoExtremoDos_TarifaParqueo() {
 
         //Arrange
-        val carro: Carro = Carro("hsu531")
+        val carro = Carro("hsu531")
         val duracionServicioEstacionamiento = 2376
         //Act
         val cobro = CobroTarifaCarro().cobroTarifa(duracionServicioEstacionamiento, carro)
