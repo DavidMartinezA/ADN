@@ -58,12 +58,11 @@ class CobroTarifaMoto(
                     tarifaParqueoTotal = 0
                 }
             }
-            return tarifaParqueoTotal
-        }
-        if ((vehiculo as Moto).cilindrajeAlto) {
-            tarifaParqueoTotal += cobroAdicionalAltoCilindraje
-        } else {
-            tarifaParqueoTotal = 0
+            if ((vehiculo as Moto).cilindrajeAlto) {
+                tarifaParqueoTotal += cobroAdicionalAltoCilindraje
+            } else {
+                tarifaParqueoTotal = 0
+            }
         }
         return tarifaParqueoTotal
     }
