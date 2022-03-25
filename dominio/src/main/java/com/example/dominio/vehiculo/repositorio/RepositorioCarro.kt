@@ -5,11 +5,11 @@ import com.example.dominio.vehiculo.modelo.Vehiculo
 
 interface RepositorioCarro {
 
-    suspend fun carroExiste(vehiculo: Vehiculo): Boolean
+    suspend fun carroExiste(carro: Carro): Boolean
 
     suspend fun guardarCarro(carro: Carro)
 
-    suspend fun eliminarCarro(vehiculo: Vehiculo)
+    suspend fun eliminarCarro(carro: Carro)
 
     suspend fun listaCarros(): ArrayList<Vehiculo>
 }

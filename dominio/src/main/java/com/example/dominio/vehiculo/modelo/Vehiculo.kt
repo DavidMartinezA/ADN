@@ -1,8 +1,18 @@
 package com.example.dominio.vehiculo.modelo
 
-abstract class Vehiculo(open var placaVehiculo: String) {
+
+abstract class Vehiculo(val placaVehiculo: String) {
+
     companion object {
         const val FORMATO_PLACA = "[a-zA-Z]{3}-?[0-9]{2}[a-zA-Z0-9]?"
-        const val MENSAJE_EXEPCION_NO_AUTORIZADO = "No Esta Autorizado Ingresar."
+    }
+
+    val mensajeNoEstaAutorizado = "No Esta Autorizado Ingresar."
+    lateinit var campoVacio: String
+
+    init {
+        if (placaVehiculo.isEmpty() || !placaVehiculo.matches(Regex(FORMATO_PLACA))) {
+            campoVacio = mensajeNoEstaAutorizado
+        }
     }
 }

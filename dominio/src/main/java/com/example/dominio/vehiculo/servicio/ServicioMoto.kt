@@ -4,25 +4,24 @@ import com.example.dominio.vehiculo.modelo.Moto
 import com.example.dominio.vehiculo.modelo.Vehiculo
 import com.example.dominio.vehiculo.repositorio.RepositorioMoto
 
-class ServicioMoto(private var repositorioMoto: RepositorioMoto) : ServicioVehiculo() {
+class ServicioMoto(private var repositorioMoto: RepositorioMoto, var moto: Moto) :
+    ServicioVehiculo() {
 
-    override suspend fun guardar(vehiculo: Vehiculo): Boolean {
-        val motoGuardada = if (repositorioMoto.motoExiste(vehiculo)) {
+    override suspend fun guardar(): Boolean {
+        val motoGuardada = if (repositorioMoto.motoExiste(moto)) {
             false
-            // todo ARROJAR UNA EXEPCION
         } else {
-            repositorioMoto.guardarMoto(vehiculo as Moto)
+            repositorioMoto.guardarMoto(moto)
             true
         }
         return motoGuardada
     }
 
-    override suspend fun eliminar(vehiculo: Vehiculo): Boolean {
-        val motoBorrada = if (repositorioMoto.motoExiste(vehiculo)) {
+    override suspend fun eliminar(): Boolean {
+        val motoBorrada = if (repositorioMoto.motoExiste(moto)) {
             false
-            // todo ARROJAR UNA EXEPCION
         } else {
-            repositorioMoto.eliminarMoto(vehiculo as Moto)
+            repositorioMoto.eliminarMoto(moto)
             true
         }
         return motoBorrada

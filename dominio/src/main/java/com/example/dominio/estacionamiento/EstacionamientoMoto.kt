@@ -1,48 +1,38 @@
 package com.example.dominio.estacionamiento
 
-import com.example.dominio.cobro.CobroTarifaMoto
+import com.example.dominio.vehiculo.modelo.Moto
 import com.example.dominio.vehiculo.modelo.Vehiculo
 import com.example.dominio.vehiculo.servicio.ServicioMoto
-import java.time.LocalDate
-import java.time.LocalDateTime
-import java.time.LocalTime
-import java.time.temporal.Temporal
 
-class EstacionamientoMoto(override var vehiculo: Vehiculo, var servicioMoto: ServicioMoto) :
-    EstacionamientoVehiculo(vehiculo) {
+class EstacionamientoMoto(var moto: Vehiculo, private var servicioMoto: ServicioMoto) :
+    EstacionamientoVehiculo(moto) {
 
     companion object {
         const val CAPACIDAD_TOTAL_MOTOS = 10
     }
-
-    override lateinit var horaIngreso: Temporal
-    override lateinit var horaSalida: Temporal
 
     override suspend fun consutarCapacidad(): Boolean {
         val listaMotos: ArrayList<Vehiculo> = servicioMoto.consultarLista()
         return listaMotos.size <= CAPACIDAD_TOTAL_MOTOS
     }
 
-    override suspend fun ingresoVehiculos(): Boolean {
-        horaIngreso = LocalDateTime.of(LocalDate.now(), LocalTime.now())
+    override suspend fun ingreso(): Boolean {
+        val capacidad = super.ingreso()
         var vehiculoIngresado = false
-        val capacidad = consutarCapacidad()
-        if (capacidad) {
-            servicioMoto.guardar(vehiculo)
+        if (capacidad && !restriccionIngreso() && vehiculo is Moto) {
+            servicioMoto.guardar()
             vehiculoIngresado = true
         }
         return vehiculoIngresado
     }
 
-    override suspend fun salidaVehiculos(): Int {
-        horaSalida = LocalDateTime.of(LocalDate.now(), LocalTime.now())
-        val cobro = CobroTarifaMoto(duracionServicioEstacionamiento(horaIngreso, horaSalida),
-            vehiculo).cobroTarifa()
-        var tarifaTotal = 0
-        if (servicioMoto.consultarLista().contains(vehiculo)) {
-            tarifaTotal = cobro
+    override suspend fun salida(): Int {
+        var cobroDeServicio = 0
+        val tarifaTotal = super.salida()
+        if (servicioMoto.consultarLista().contains(moto)) {
+            cobroDeServicio = tarifaTotal
         }
-        return tarifaTotal
+        return cobroDeServicio
     }
 }
 

@@ -4,25 +4,23 @@ import com.example.dominio.vehiculo.modelo.Carro
 import com.example.dominio.vehiculo.modelo.Vehiculo
 import com.example.dominio.vehiculo.repositorio.RepositorioCarro
 
-class ServicioCarro(var repositorioCarro: RepositorioCarro) : ServicioVehiculo() {
+class ServicioCarro(var repositorioCarro: RepositorioCarro, var carro: Carro) : ServicioVehiculo() {
 
-    override suspend fun guardar(vehiculo: Vehiculo): Boolean {
-        val carroGuardado = if (repositorioCarro.carroExiste(vehiculo)) {
+    override suspend fun guardar(): Boolean {
+        val carroGuardado = if (repositorioCarro.carroExiste(carro)) {
             false
-            // todo ARROJAR UNA EXEPCION
         } else {
-            repositorioCarro.guardarCarro(vehiculo as Carro)
+            repositorioCarro.guardarCarro(carro)
             true
         }
         return carroGuardado
     }
 
-    override suspend fun eliminar(vehiculo: Vehiculo): Boolean {
-        val carroEliminado = if (repositorioCarro.carroExiste(vehiculo)) {
+    override suspend fun eliminar(): Boolean {
+        val carroEliminado = if (repositorioCarro.carroExiste(carro)) {
             false
-            // todo ARROJAR UNA EXEPCION
         } else {
-            repositorioCarro.eliminarCarro(vehiculo as Carro)
+            repositorioCarro.eliminarCarro(carro)
             true
         }
         return carroEliminado
