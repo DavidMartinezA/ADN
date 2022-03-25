@@ -12,7 +12,7 @@ class CobroTarifaCarroTest {
         val carro: Carro = Carro("hsu531")
         val duracionServicioEstacionamiento = 9
         //Act
-        val cobro = CobroTarifaCarro(duracionServicioEstacionamiento, carro).cobroTarifa()
+        val cobro = CobroTarifaCarro().cobroTarifa(duracionServicioEstacionamiento, carro)
         //Assert
         assert(cobro == 8000)
     }
@@ -24,7 +24,7 @@ class CobroTarifaCarroTest {
         val carro: Carro = Carro("hsu531")
         val duracionServicioEstacionamiento = 6
         //Act
-        val cobro = CobroTarifaCarro(duracionServicioEstacionamiento, carro).cobroTarifa()
+        val cobro = CobroTarifaCarro().cobroTarifa(duracionServicioEstacionamiento, carro)
         //Assert
         assert(cobro == 6000)
     }
@@ -36,7 +36,7 @@ class CobroTarifaCarroTest {
         val carro: Carro = Carro("hsu531")
         val duracionServicioEstacionamiento = 50
         //Act
-        val cobro = CobroTarifaCarro(duracionServicioEstacionamiento, carro).cobroTarifa()
+        val cobro = CobroTarifaCarro().cobroTarifa(duracionServicioEstacionamiento, carro)
         //Assert
         assert(cobro == 18000)
     }
@@ -48,7 +48,7 @@ class CobroTarifaCarroTest {
         val carro: Carro = Carro("hsu531")
         val duracionServicioEstacionamiento = -50
         //Act
-        val cobro = CobroTarifaCarro(duracionServicioEstacionamiento, carro).cobroTarifa()
+        val cobro = CobroTarifaCarro().cobroTarifa(duracionServicioEstacionamiento, carro)
         //Assert
         assert(cobro == 0)
     }
@@ -60,7 +60,7 @@ class CobroTarifaCarroTest {
         val carro: Carro = Carro("hsu531")
         val duracionServicioEstacionamiento = 999
         //Act
-        val cobro = CobroTarifaCarro(duracionServicioEstacionamiento, carro).cobroTarifa()
+        val cobro = CobroTarifaCarro().cobroTarifa(duracionServicioEstacionamiento, carro)
         //Assert
         assert(cobro == 336000)
     }
@@ -72,7 +72,7 @@ class CobroTarifaCarroTest {
         val carro: Carro = Carro("hsu531")
         val duracionServicioEstacionamiento = 2376
         //Act
-        val cobro = CobroTarifaCarro(duracionServicioEstacionamiento, carro).cobroTarifa()
+        val cobro = CobroTarifaCarro().cobroTarifa(duracionServicioEstacionamiento, carro)
         //Assert
         assert(cobro == 792000)
     }

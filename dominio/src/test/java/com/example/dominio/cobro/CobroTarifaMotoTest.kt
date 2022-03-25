@@ -64,4 +64,30 @@ class CobroTarifaMotoTest {
         //Assert
         assert(cobro == 0)
     }
+
+    @Test
+
+    fun cobroTarifa_MotoTiempoExtremoAltoCilindrajeFalse_TarifaParqueo() {
+
+        //Arrange
+        val moto: Moto = Moto("hsu531", false)
+        val duracionServicioEstacionamiento = 156
+        //Act
+        val cobro = CobroTarifaMoto().cobroTarifa(duracionServicioEstacionamiento, moto)
+        //Assert
+        assert(cobro == 28000)
+    }
+
+    @Test
+
+    fun cobroTarifa_MotoTiempoExtremoAltoCilindrajeTrue_TarifaParqueo() {
+
+        //Arrange
+        val moto: Moto = Moto("hsu531", true)
+        val duracionServicioEstacionamiento = 156
+        //Act
+        val cobro = CobroTarifaMoto().cobroTarifa(duracionServicioEstacionamiento, moto)
+        //Assert
+        assert(cobro == 30000)
+    }
 }
